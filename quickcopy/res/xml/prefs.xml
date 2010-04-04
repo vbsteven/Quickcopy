@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:title="Preferences"
+        android:key="GLOBAL"
+        >
+        
+    <PreferenceCategory android:title="Integration">
+            
+        <CheckBoxPreference
+            android:key="integration.shownotification"
+            android:title="Show notification"
+            android:summary="If set, shows a permanent icon in the notification bar for easy snippet access"
+            android:defaultValue="true"
+            android:persistent="true"
+            android:enabled="true"
+            />
+    	<CheckBoxPreference
+            android:key="integration.showads"
+            android:title="Show ads in main screen"
+            android:summary="If you like this app you can support me by not hiding the ads."
+            android:defaultValue="true"
+            android:persistent="true"
+            android:enabled="true"
+            />
+            
+    	<CheckBoxPreference
+            android:key="integration.startonboot"
+            android:title="Start on boot"
+            android:summary="Automatically start Quickcopy when your device is starting"
+            android:defaultValue="false"
+            android:persistent="true"
+            android:enabled="true"
+            />
+    </PreferenceCategory>   
+</PreferenceScreen>

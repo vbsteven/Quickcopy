@@ -1,0 +1,40 @@
+10
+
+dir
+6
+https://quickcopy.googlecode.com/svn/trunk/quickcopy/res
+https://quickcopy.googlecode.com/svn
+
+
+
+2009-08-18T08:40:17.686185Z
+3
+steven.v.bael
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+419c2132-8b77-11de-b74b-2df4680eaf45
+
+drawable
+dir
+
+layout
+dir
+
+menu
+dir
+
+values
+dir
+

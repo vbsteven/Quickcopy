@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/3/trunk/quickcopy/res/layout
+END
+main_no_entries.xml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/3/trunk/quickcopy/res/layout/main_no_entries.xml
+END
+simple_list_item_1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3/trunk/quickcopy/res/layout/simple_list_item_1.xml
+END
+main.xml
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/3/trunk/quickcopy/res/layout/main.xml
+END
+edit_entry_activity.xml
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/3/trunk/quickcopy/res/layout/edit_entry_activity.xml
+END
+add_new_entry_dialog.xml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/3/trunk/quickcopy/res/layout/add_new_entry_dialog.xml
+END
