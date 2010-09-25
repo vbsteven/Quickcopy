@@ -34,9 +34,13 @@ public class DBHelper {
 	private static final String TABLE_NAME_GROUPS = "groups";
 	private static final String COLUMN_NAME_VALUE = "value";
 	private static final String COLUMN_NAME_GROUP = "_group";
+	private static final String COLUMN_NAME_HIDDEN = "hidden";
+	private static final String COLUMN_NAME_KEY = "key";
 	private static final String CREATE_TABLE_ENTRIES = "create table " + TABLE_NAME_ENTRIES + " (_id integer primary key autoincrement, " + COLUMN_NAME_VALUE + " text not null);";
 	private static final String CREATE_TABLE_GROUPS = "create table " + TABLE_NAME_GROUPS + "(_id integer primary key autoincrement, " + COLUMN_NAME_VALUE + " text not null);";
 	private static final String ALTER_TABLE_V1 = "alter table " + TABLE_NAME_ENTRIES + " add " + COLUMN_NAME_GROUP + " integer;";
+	private static final String ALTER_TABLE_V2a = "alter table " + TABLE_NAME_ENTRIES + " add " + COLUMN_NAME_HIDDEN + " integer;";
+	private static final String ALTER_TABLE_V2b = "alter table " + TABLE_NAME_ENTRIES + " add " + COLUMN_NAME_KEY + " text"; 
 	
 	private SQLiteDatabase db;
 	
@@ -67,22 +71,19 @@ public class DBHelper {
         } catch (Exception e) {
         	// modification already done;
         }
+        
+        try {
+        	db.execSQL(ALTER_TABLE_V2a);
+        } catch (Exception e) {
+        	// modification already done;
+        }
+        
+        try {
+        	db.execSQL(ALTER_TABLE_V2b);
+        } catch (Exception e) {
+        	// modification already done
+        }
 	}
-	
-
-//	public ArrayList<String> getEntries() {
-//		Cursor c = db.query(TABLE_NAME_ENTRIES, new String[] {COLUMN_NAME_VALUE}, null, null, null, null, null);
-//        ArrayList<String> values = new ArrayList<String>();
-//        int columnId = c.getColumnIndex(COLUMN_NAME_VALUE);
-//        if (c.moveToFirst()) {
-//        	do {
-//        		values.add(c.getString(columnId));
-//        	} while (c.moveToNext());
-//        }
-//        
-//        Collections.sort(values);
-//        return values;
-//	}
 	
 	public ArrayList<ListItem> getEntries() {
 		ArrayList<ListItem> result = new ArrayList<ListItem>();
