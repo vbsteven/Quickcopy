@@ -3,27 +3,38 @@ package be.vbsteven.quickcopy;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.admob.android.ads.AdView;
 
 public class EntryListActivity extends Activity {
 
-	private static final int RESULT_NEW_ENTRY = 0;
+	private static final int REQUEST_NEW_ENTRY = 0;
+	private static final int REQUEST_NEW_GROUP = 1;
 	
 	private EntryListAdapter entryAdapter;
 	private Spinner spinner;
@@ -44,6 +55,30 @@ public class EntryListActivity extends Activity {
 		ListView lv = (ListView)findViewById(R.id.listview_entrylist);
 		lv.setAdapter(entryAdapter);
 		
+//		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
+//
+//			@Override
+//			public boolean onItemLongClick(AdapterView<?> adapterView, View view,
+//					int position, long id) {
+//				Entry entry = (Entry)adapterView.getAdapter().getItem(position);
+//				onEntryLongClicked(entry);
+//				return true;
+//			}
+//		});
+		
+		lv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view,
+					int position, long id) {
+				Entry entry = (Entry)adapterView.getAdapter().getItem(position);
+				onEntryClicked(entry);
+				return;
+			}
+		});
+		
+		registerForContextMenu(lv);
+		
 		fillGroupList();
 		
 		AdView adview;
@@ -52,10 +87,39 @@ public class EntryListActivity extends Activity {
 		
 	}
 	
+	protected void onEntryClicked(Entry entry) {
+		QuickcopyUtils.copyToClipBoard(this, entry.value);
+		Toast.makeText(this, "The value of item \"" + entry.key + "\" is copied to the clipboard", Toast.LENGTH_LONG).show();
+		finish();
+	}
+
+	protected void onEntryLongClicked(Entry entry) {
+		
+	}
+	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+		
+		Entry entry = (Entry)entryAdapter.getItem(info.position);
+		menu.setHeaderTitle(entry.value);
+		menu.add("Edit entry");
+		menu.add("Delete entry");
+		super.onCreateContextMenu(menu, v, menuInfo);
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		
+		return super.onContextItemSelected(item);
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(0, 0, 0, "New entry");
-		menu.add(0, 1, 0, "Preferences");
+		menu.add(0, 1, 0, "New group");
+		menu.add(0, 2, 1, "Preferences");
 		
 		return super.onCreateOptionsMenu(menu);
 	}
@@ -64,19 +128,21 @@ public class EntryListActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		
 		switch (item.getItemId()) {
-		case 0: startActivityForResult(new Intent(this, NewEntryActivity.class), RESULT_NEW_ENTRY); break;
-		case 1: startActivity(new Intent(this, Preferences.class)); break;
+		case 0: startActivityForResult(new Intent(this, NewEntryActivity.class), REQUEST_NEW_ENTRY); break;
+		case 1: showAddGroupDialog(); break;
+		case 2: startActivity(new Intent(this, Preferences.class)); break;
 		}
 		
 		
 		return super.onOptionsItemSelected(item);
 	}
 	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		
-		if (requestCode == RESULT_NEW_ENTRY && resultCode == RESULT_OK) {
+		if (requestCode == REQUEST_NEW_ENTRY && resultCode == RESULT_OK) {
 			ArrayList<Entry> entries = DBHelper.get(this).getEntriesFromGroup((Group)spinner.getSelectedItem());
 			entryAdapter.updateEntries(entries);
 		}
@@ -113,7 +179,47 @@ public class EntryListActivity extends Activity {
 		entryAdapter.updateEntries(entries);
 	}
 	
+	private void showAddGroupDialog() {
+		final View v = View.inflate(this, R.layout.addgroupdialog, null);
+		final EditText text = (EditText) v
+				.findViewById(R.id.et_groupname);
+		new AlertDialog.Builder(this)
+			.setTitle("Add group")
+			.setView(text)
+			.setPositiveButton("Add", new OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					String name = text.getText().toString(); 
+					addGroup(name);
+					fillGroupList();
+					setSpinnerToGroup(name);
+				}
+			})
+			.setNegativeButton("Cancel", null)
+			.show();
+	}
 	
+	
+	/*
+	 * This is ugly I know
+	 */
+	protected void setSpinnerToGroup(String name) {
+		Adapter a = spinner.getAdapter();
+		for (int i = 0; i < a.getCount(); i++) {
+			Group g = (Group)a.getItem(i);
+			if (g.name.equals(name)) {
+				spinner.setSelection(i);
+				break;
+			}
+		}
+	}
+
+	protected void addGroup(String string) {
+		DBHelper.get(this).addGroup(string);
+	}
+
+
 	public class EntryListAdapter extends BaseAdapter {
 
 		private Context context;
