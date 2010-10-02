@@ -261,9 +261,9 @@ public class QuickCopyMain extends Activity {
 		DBHelper db = DBHelper.get(this);
 		final View v = View.inflate(this, R.layout.addentrydialog, null);
 		
-		ArrayList<ListItem> groups = db.getGroups();
+		ArrayList<Group> groups = db.getGroups();
 		groups.add(0, db.getDummyGroup());
-		ArrayAdapter<ListItem> adapter = new ArrayAdapter<ListItem>(this, android.R.layout.simple_spinner_item, groups);
+		ArrayAdapter<Group> adapter = new ArrayAdapter<Group>(this, android.R.layout.simple_spinner_item, groups);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		
 		final Spinner spinner = (Spinner)v.findViewById(R.id.dialog_spinner);
@@ -284,7 +284,7 @@ public class QuickCopyMain extends Activity {
 							public void onClick(DialogInterface dialog, int id) {
 								String value = edit.getText().toString();
 								if (!value.equals("")) {
-									ListItem group = (ListItem)spinner.getSelectedItem();
+									Entry group = (Entry)spinner.getSelectedItem();
 									idLastSelectedGroup = (int)spinner.getSelectedItemId();
 									tracker.trackEvent("Actions", "Add entry", value, 0);
 									if (group.id < 0) {
@@ -309,7 +309,7 @@ public class QuickCopyMain extends Activity {
 		alert.show();
 	}
 	
-	private void editEntry(final ListItem entry) {
+	private void editEntry(final Entry entry) {
 
 		final EditText edit = new EditText(this);
 		edit.setText(entry.value);
@@ -354,8 +354,8 @@ public class QuickCopyMain extends Activity {
 
 		DBHelper db = DBHelper.get(this);
 		
-		ArrayList<ListItem> entries = db.getEntries();
-		ArrayList<ListItem> groups = db.getGroups();
+		ArrayList<Entry> entries = db.getEntries();
+		ArrayList<Group> groups = db.getGroups();
 		if (entries.size() == 0) {
 			TextView tv = (TextView)findViewById(R.id.textEntries);
 			tv.setText("Your list of entries is still empty\n\nUse the menu button on your device to add new entries to your Quickcopy list" 
@@ -371,8 +371,8 @@ public class QuickCopyMain extends Activity {
 			flipper.addView(createCategoryView("All entries", entries));
 			
 			// add all groups
-			for (ListItem group: groups) {
-				flipper.addView(createCategoryView(group.value, db.getEntriesFromGroup(group)));
+			for (Group group: groups) {
+				flipper.addView(createCategoryView(group.name, db.getEntriesFromGroup(group)));
 			}
 			
 
@@ -416,15 +416,15 @@ public class QuickCopyMain extends Activity {
 	
 	private class EntriesAdapter extends BaseAdapter { 
 		
-		private ArrayList<ListItem> entries;
+		private ArrayList<Entry> entries;
 		
-		public EntriesAdapter(ArrayList<ListItem> entries) {
+		public EntriesAdapter(ArrayList<Entry> entries) {
 			this.entries = entries;
 		}
 		
 		@Override
 		public View getView(int arg0, View arg1, ViewGroup arg2) {
-			ListItem li = (ListItem)entries.get(arg0);
+			Entry li = (Entry)entries.get(arg0);
 			if (arg1 == null) {
 				arg1 = View.inflate(QuickCopyMain.this, R.layout.simple_list_item_1, null);
 			}
@@ -448,7 +448,7 @@ public class QuickCopyMain extends Activity {
 		}
 	};
 	
-	private View createCategoryView(String name, ArrayList<ListItem> entries) {
+	private View createCategoryView(String name, ArrayList<Entry> entries) {
 		// init view
 		View v = View.inflate(this, R.layout.valuelist, null);
 		
@@ -467,10 +467,8 @@ public class QuickCopyMain extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
-				ListItem item = (ListItem)arg0.getAdapter().getItem(arg2);
-				if (item.isItem()) {
-					copyToClipBoard(item.value);
-				}
+				Entry item = (Entry)arg0.getAdapter().getItem(arg2);
+				copyToClipBoard(item.value);
 			}
 
 
@@ -481,7 +479,7 @@ public class QuickCopyMain extends Activity {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
-				ListItem item = (ListItem)arg0.getAdapter().getItem(arg2);
+				Entry item = (Entry)arg0.getAdapter().getItem(arg2);
 				editEntry(item);
 				return false;
 			}

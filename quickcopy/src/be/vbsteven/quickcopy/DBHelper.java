@@ -85,44 +85,50 @@ public class DBHelper {
         }
 	}
 	
-	public ArrayList<ListItem> getEntries() {
-		ArrayList<ListItem> result = new ArrayList<ListItem>();
+	public ArrayList<Entry> getEntries() {
+		ArrayList<Entry> result = new ArrayList<Entry>();
 		
-		Cursor c = db.query(TABLE_NAME_ENTRIES, new String[] {COLUMN_NAME_VALUE, "_id"}, null, null, null, null, null);
+		Cursor c = db.query(TABLE_NAME_ENTRIES, null, null, null, null, null, null);
 		int valueId = c.getColumnIndex(COLUMN_NAME_VALUE);
 		int idId = c.getColumnIndex("_id");
+		int hiddenId = c.getColumnIndex(COLUMN_NAME_HIDDEN);
+		int keyId = c.getColumnIndex(COLUMN_NAME_KEY);
+		
 		if (c.moveToFirst()) {
 			do {
-				result.add(new ListItem(c.getInt(idId), c.getString(valueId), ListItem.ITEM));
+				result.add(new Entry(c.getInt(idId), c.getString(valueId), c.getInt(hiddenId) == 1, c.getString(keyId)));
 			} while(c.moveToNext());
 		}
 		
 		return result;
 	}
 	
-	public ArrayList<ListItem> getEntriesFromGroup(ListItem group) {
-ArrayList<ListItem> result = new ArrayList<ListItem>();
+	public ArrayList<Entry> getEntriesFromGroup(Group group) {
+		ArrayList<Entry> result = new ArrayList<Entry>();
 		
-		Cursor c = db.query(TABLE_NAME_ENTRIES, new String[] {COLUMN_NAME_VALUE, "_id"}, COLUMN_NAME_GROUP + " = ?", new String[] {group.id + ""}, null, null, null);
+		Cursor c = db.query(TABLE_NAME_ENTRIES, null, COLUMN_NAME_GROUP + " = ?", new String[] {group.id + ""}, null, null, null);
 		int valueId = c.getColumnIndex(COLUMN_NAME_VALUE);
 		int idId = c.getColumnIndex("_id");
+		int hiddenId = c.getColumnIndex(COLUMN_NAME_HIDDEN);
+		int keyId = c.getColumnIndex(COLUMN_NAME_KEY);
+		
 		if (c.moveToFirst()) {
 			do {
-				result.add(new ListItem(c.getInt(idId), c.getString(valueId), ListItem.ITEM));
+				result.add(new Entry(c.getInt(idId), c.getString(valueId), c.getInt(hiddenId) == 1, c.getString(keyId)));
 			} while(c.moveToNext());
 		}
 		
 		return result;
 	}
 	
-	public ArrayList<ListItem> getGroups() {
-		ArrayList<ListItem> result = new ArrayList<ListItem>();
+	public ArrayList<Group> getGroups() {
+		ArrayList<Group> result = new ArrayList<Group>();
 		Cursor c = db.query(TABLE_NAME_GROUPS, new String[] {COLUMN_NAME_VALUE, "_id"}, null, null, null, null, null);
 		int valueId = c.getColumnIndex(COLUMN_NAME_VALUE);
 		int idId =  c.getColumnIndex("_id");
 		if (c.moveToFirst()) {
 			do {
-				result.add(new ListItem(c.getInt(idId), c.getString(valueId), ListItem.FOLDER));
+				result.add(new Group(c.getInt(idId), c.getString(valueId)));
 			} while(c.moveToNext());
 		}
 		
@@ -131,8 +137,8 @@ ArrayList<ListItem> result = new ArrayList<ListItem>();
 		
 	}
 	
-	public ListItem getDummyGroup() {
-		ListItem group = new ListItem(-1, "No group", ListItem.FOLDER);
+	public Group getDummyGroup() {
+		Group group = new Group(-1, "No group");
 		return group;
 	}
 
@@ -184,4 +190,7 @@ ArrayList<ListItem> result = new ArrayList<ListItem>();
 		statement.bindLong(2, id);
 		statement.execute();
 	}
+
+	public int id;
+	public String value;
 }
