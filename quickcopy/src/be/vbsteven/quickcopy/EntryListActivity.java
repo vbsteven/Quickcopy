@@ -11,6 +11,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
@@ -24,6 +26,7 @@ public class EntryListActivity extends Activity {
 	private static final int RESULT_NEW_ENTRY = 0;
 	
 	private EntryListAdapter entryAdapter;
+	private Spinner spinner;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +37,8 @@ public class EntryListActivity extends Activity {
 		
 		DBHelper db = DBHelper.get(this);
 		
-		ArrayList<Entry> entries = db.getEntries();
+		ArrayList<Entry> entries = db.getEntriesFromGroup(db.getDummyGroup());
 		
-		Entry p = new Entry(33, "This is a very long entry text, let's see how the application handles this.", false, "Longtext");
-		entries.add(p);
 		entryAdapter = new EntryListAdapter(this, entries);
 		
 		ListView lv = (ListView)findViewById(R.id.listview_entrylist);
@@ -76,7 +77,7 @@ public class EntryListActivity extends Activity {
 		super.onActivityResult(requestCode, resultCode, data);
 		
 		if (requestCode == RESULT_NEW_ENTRY && resultCode == RESULT_OK) {
-			ArrayList<Entry> entries = DBHelper.get(this).getEntries();
+			ArrayList<Entry> entries = DBHelper.get(this).getEntriesFromGroup((Group)spinner.getSelectedItem());
 			entryAdapter.updateEntries(entries);
 		}
 	}
@@ -86,13 +87,31 @@ public class EntryListActivity extends Activity {
 		ArrayList<Group> groups = db.getGroups();
 		groups.add(0, db.getDummyGroup());
 		
-		Spinner s = (Spinner)findViewById(R.id.spinner_category);
+		spinner = (Spinner)findViewById(R.id.spinner_category);
 		ArrayAdapter<Group> adapter = new ArrayAdapter<Group>(this, android.R.layout.simple_spinner_item, groups);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		s.setAdapter(adapter);
+		spinner.setAdapter(adapter);
+		
+		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> adapterView, View view,
+					int position, long id) {
+				changeGroup((Group)adapterView.getAdapter().getItem((int)id));
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 	
-	
+	private void changeGroup(Group group) {
+		ArrayList<Entry> entries = DBHelper.get(this).getEntriesFromGroup(group);
+		entryAdapter.updateEntries(entries);
+	}
 	
 	
 	public class EntryListAdapter extends BaseAdapter {
