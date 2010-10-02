@@ -21,6 +21,9 @@ import com.admob.android.ads.AdView;
 
 public class EntryListActivity extends Activity {
 
+	private static final int RESULT_NEW_ENTRY = 0;
+	
+	private EntryListAdapter entryAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +38,10 @@ public class EntryListActivity extends Activity {
 		
 		Entry p = new Entry(33, "This is a very long entry text, let's see how the application handles this.", false, "Longtext");
 		entries.add(p);
-		EntryListAdapter adapter = new EntryListAdapter(this, entries);
+		entryAdapter = new EntryListAdapter(this, entries);
 		
 		ListView lv = (ListView)findViewById(R.id.listview_entrylist);
-		lv.setAdapter(adapter);
+		lv.setAdapter(entryAdapter);
 		
 		fillGroupList();
 		
@@ -51,17 +54,32 @@ public class EntryListActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(0, 0, 0, "New entry");
+		menu.add(0, 1, 0, "Preferences");
 		
 		return super.onCreateOptionsMenu(menu);
 	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		startActivity(new Intent(this, NewEntryActivity.class));
+		
+		switch (item.getItemId()) {
+		case 0: startActivityForResult(new Intent(this, NewEntryActivity.class), RESULT_NEW_ENTRY); break;
+		case 1: startActivity(new Intent(this, Preferences.class)); break;
+		}
+		
 		
 		return super.onOptionsItemSelected(item);
 	}
 	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if (requestCode == RESULT_NEW_ENTRY && resultCode == RESULT_OK) {
+			ArrayList<Entry> entries = DBHelper.get(this).getEntries();
+			entryAdapter.updateEntries(entries);
+		}
+	}
 	
 	private void fillGroupList() {
 		DBHelper db = DBHelper.get(this);
@@ -141,6 +159,11 @@ public class EntryListActivity extends Activity {
 			}
 			
 			return result;
+		}
+		
+		public void updateEntries(ArrayList<Entry> entries) {
+			this.entries = entries;
+			notifyDataSetChanged();
 		}
 		
 	}

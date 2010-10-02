@@ -15,8 +15,6 @@ import android.widget.Toast;
 
 public class NewEntryActivity extends Activity {
 
-	private Entry entry;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,8 +39,7 @@ public class NewEntryActivity extends Activity {
 		EditText valueText = (EditText)findViewById(R.id.et_value);
 		
 		if (titleText.getText().toString().equals("") || valueText.getText().toString().equals("")) {
-			//TODO show error
-			Toast.makeText(this, "Fail", Toast.LENGTH_LONG).show();
+			QuickcopyUtils.showUserDialog(this, "Error creating entry", "Some of the fields are empty.");
 			return;
 		}
 		
@@ -51,8 +48,13 @@ public class NewEntryActivity extends Activity {
 		Spinner s = (Spinner)findViewById(R.id.spinner_category);
 		Group g = (Group)s.getSelectedItem();
 		
-		Entry entry= new Entry(-1, valueText.getText().toString(), passwordBox.isChecked(), titleText.getText().toString());
+		DBHelper.get(this).addEntry(titleText.getText().toString(), valueText.getText().toString(), passwordBox.isChecked(), g);
+		
 		Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
+		
+		setResult(RESULT_OK);
+		finish();
+		
 		
 		return;
 	}

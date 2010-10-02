@@ -142,21 +142,23 @@ public class DBHelper {
 		return group;
 	}
 
-	public void addEntry(String entry) {
-		SQLiteStatement statement = db.compileStatement("INSERT INTO " + TABLE_NAME_ENTRIES + " VALUES (?, ?, ?)");
-		statement.bindNull(1);
-		statement.bindString(2, entry);
-		statement.bindNull(3);
+	public void addEntry(String key, String value, boolean hidden, Group g) {
+		SQLiteStatement statement = db.compileStatement("INSERT INTO " + TABLE_NAME_ENTRIES + " VALUES (?, ?, ?, ?, ?)");
+		statement.bindNull(1); // id
+		statement.bindString(2, value); // value
+		statement.bindLong(3, g.id); // group
+		statement.bindLong(4, hidden?1:0); // hidden
+		statement.bindString(5, key); //key
 		statement.execute();
 	}
 	
-	public void addEntryWithGroup(String entry, int groupId) {
-		SQLiteStatement statement = db.compileStatement("INSERT INTO " + TABLE_NAME_ENTRIES + " VALUES (?, ?, ?)");
-		statement.bindNull(1);
-		statement.bindString(2, entry);
-		statement.bindString(3, groupId + "");
-		statement.execute();
-	}
+//	public void addEntryWithGroup(String entry, int groupId) {
+//		SQLiteStatement statement = db.compileStatement("INSERT INTO " + TABLE_NAME_ENTRIES + " VALUES (?, ?, ?)");
+//		statement.bindNull(1);
+//		statement.bindString(2, entry);
+//		statement.bindString(3, groupId + "");
+//		statement.execute();
+//	}
 	
 	public void updateEntry(int id, String newValue) {
 		SQLiteStatement statement = db.compileStatement("UPDATE " + TABLE_NAME_ENTRIES + " SET value = ? WHERE _id = ?;");

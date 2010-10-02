@@ -289,12 +289,12 @@ public class QuickCopyMain extends Activity {
 									tracker.trackEvent("Actions", "Add entry", value, 0);
 									if (group.id < 0) {
 										// group is empty
-										DBHelper.get(QuickCopyMain.this).addEntry(
-												value);
+//										DBHelper.get(QuickCopyMain.this).addEntry(
+//												value);
 										refresh();
 									} else {
-										DBHelper.get(QuickCopyMain.this).addEntryWithGroup(value, group.id);
-										refresh();
+//										DBHelper.get(QuickCopyMain.this).addEntryWithGroup(value, group.id);
+//										refresh();
 									}
 								}
 							}
