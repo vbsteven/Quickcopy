@@ -11,6 +11,8 @@ public class Global {
 	public static final String TAG = "be.vbsteven.quickcopy";
 	public static final String PREFS = "be.vbsteven.quickcopy_preferences";
 	
+	public static final String PASSWORD_HASH = "*****";
+	
 	private static GoogleAnalyticsTracker tracker = null;
 	
 	public static SharedPreferences getPrefs(Context context) {
@@ -31,6 +33,5 @@ public class Global {
 		} catch (NameNotFoundException e) {
 			return "";
 		}
-
 	}
 }
