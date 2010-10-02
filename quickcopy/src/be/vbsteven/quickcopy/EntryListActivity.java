@@ -4,8 +4,11 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -45,6 +48,21 @@ public class EntryListActivity extends Activity {
 		
 	}
 	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add(0, 0, 0, "New entry");
+		
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		startActivity(new Intent(this, NewEntryActivity.class));
+		
+		return super.onOptionsItemSelected(item);
+	}
+	
+	
 	private void fillGroupList() {
 		DBHelper db = DBHelper.get(this);
 		ArrayList<Group> groups = db.getGroups();
@@ -54,8 +72,8 @@ public class EntryListActivity extends Activity {
 		ArrayAdapter<Group> adapter = new ArrayAdapter<Group>(this, android.R.layout.simple_spinner_item, groups);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		s.setAdapter(adapter);
-		
 	}
+	
 	
 	
 	

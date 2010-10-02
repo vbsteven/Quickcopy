@@ -30,5 +30,5 @@
 		android:layout_width="wrap_content"
 		android:src="@drawable/ic_menu_set_as"
 		/>
-	
+		
 </RelativeLayout>

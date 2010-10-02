@@ -21,6 +21,8 @@
             </intent-filter>
         </activity>
         
+        <activity android:name=".NewEntryActivity" />
+        
 		<receiver android:name=".BootIntentReceiver">        
         	<intent-filter>
         		<action android:name="android.intent.action.BOOT_COMPLETED"/>
