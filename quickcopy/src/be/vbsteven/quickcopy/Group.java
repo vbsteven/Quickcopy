@@ -8,6 +8,11 @@ public class Group implements Comparable<Group> {
 		this.id = id;
 		this.name = name;
 	}
+	
+	@Override
+	public String toString() {
+		return name;
+	}
 
 	@Override
 	public int compareTo(Group another) {

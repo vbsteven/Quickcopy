@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.admob.android.ads.AdView;
@@ -27,10 +29,15 @@ public class EntryListActivity extends Activity {
 		DBHelper db = DBHelper.get(this);
 		
 		ArrayList<Entry> entries = db.getEntries();
+		
+		Entry p = new Entry(33, "This is a very long entry text, let's see how the application handles this.", false, "Longtext");
+		entries.add(p);
 		EntryListAdapter adapter = new EntryListAdapter(this, entries);
 		
 		ListView lv = (ListView)findViewById(R.id.listview_entrylist);
 		lv.setAdapter(adapter);
+		
+		fillGroupList();
 		
 		AdView adview;
 		adview = (AdView)findViewById(R.id.ad);
@@ -38,6 +45,17 @@ public class EntryListActivity extends Activity {
 		
 	}
 	
+	private void fillGroupList() {
+		DBHelper db = DBHelper.get(this);
+		ArrayList<Group> groups = db.getGroups();
+		groups.add(0, db.getDummyGroup());
+		
+		Spinner s = (Spinner)findViewById(R.id.spinner_category);
+		ArrayAdapter<Group> adapter = new ArrayAdapter<Group>(this, android.R.layout.simple_spinner_item, groups);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		s.setAdapter(adapter);
+		
+	}
 	
 	
 	
@@ -90,7 +108,7 @@ public class EntryListActivity extends Activity {
 			if (convertView != null) {
 				result = convertView;
 			} else {
-				result = inflater.inflate(R.layout.entrylistitem, null);
+				result = inflater.inflate(R.layout.entrylistitem, parent, false);
 			}
 			
 			// fill up values

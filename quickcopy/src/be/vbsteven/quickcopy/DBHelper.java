@@ -138,7 +138,7 @@ public class DBHelper {
 	}
 	
 	public Group getDummyGroup() {
-		Group group = new Group(-1, "No group");
+		Group group = new Group(-1, "All entries");
 		return group;
 	}
 

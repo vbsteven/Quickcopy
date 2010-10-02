@@ -8,7 +8,8 @@
 		android:layout_height="wrap_content"
 		android:layout_width="wrap_content"
 		android:orientation="vertical"
-		android:paddingLeft="17dip"
+		android:paddingLeft="10dip"
+		android:paddingRight="60dip"
 		android:layout_alignParentLeft="true"
 		>
 		<TextView android:id="@+id/entrylistitem_title"
@@ -23,18 +24,11 @@
 		</TextView>
 	</LinearLayout>
 	
-	<LinearLayout
+	<ImageView 
+		android:layout_alignParentRight="true"
 		android:layout_height="wrap_content"
 		android:layout_width="wrap_content"
-		android:orientation="horizontal"
-		android:layout_alignParentRight="true"
-		>
-		<ImageView 
-			android:layout_height="wrap_content"
-			android:layout_width="wrap_content"
-			android:layout_gravity="center_vertical"
-			android:src="@drawable/ic_menu_set_as"
-			/>
-	</LinearLayout>
+		android:src="@drawable/ic_menu_set_as"
+		/>
 	
 </RelativeLayout>
