@@ -11,6 +11,8 @@ public class Global {
 	public static final String TAG = "be.vbsteven.quickcopy";
 	public static final String PREFS = "be.vbsteven.quickcopy_preferences";
 	
+	public static final String QUICKCOPY_ENTRY_ID = "QUICKCOPY_ENTRY_ID";
+	
 	public static final String PASSWORD_HASH = "*****";
 	
 	private static GoogleAnalyticsTracker tracker = null;

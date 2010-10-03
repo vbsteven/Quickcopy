@@ -52,11 +52,19 @@
 	<Spinner android:id="@+id/spinner_category"
 	  android:layout_height="wrap_content"
 	  android:layout_width="fill_parent"
+	  android:prompt="@string/groupspinner_prompt"
 	  />
 	  
 		<Button android:id="@+id/but_create" 
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:layout_gravity="bottom"
-			android:text="Create" />
+			android:text="Create" 
+			android:visibility="gone"/>
+		<Button android:id="@+id/but_save" 
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom"
+			android:text="Save" 
+			android:visibility="gone"/>
 </LinearLayout>

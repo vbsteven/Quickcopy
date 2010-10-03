@@ -20,5 +20,5 @@
 <resources>
     <string name="hello">Hello World, QuickCopyMain!</string>
     <string name="app_name">Quickcopy</string>
-    <string name="groupspinner_prompt">Select a group for this entry</string>
+    <string name="groupspinner_prompt">Select group</string>
 </resources>

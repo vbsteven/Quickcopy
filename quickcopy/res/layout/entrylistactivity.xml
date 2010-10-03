@@ -12,6 +12,7 @@
 	<Spinner android:id="@+id/spinner_category"
 	  android:layout_height="wrap_content"
 	  android:layout_width="fill_parent"
+	  android:prompt="@string/groupspinner_prompt"
 	  />
 	  
 	<ListView android:id="@+id/listview_entrylist"

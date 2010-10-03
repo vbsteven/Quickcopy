@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -35,9 +34,15 @@ public class EntryListActivity extends Activity {
 
 	private static final int REQUEST_NEW_ENTRY = 0;
 	private static final int REQUEST_NEW_GROUP = 1;
+	private static final int REQUEST_EDIT_ENTRY = 2;
+	
+	private static final int CONTEXT_MENU_EDIT = 3;
+	private static final int CONTEXT_MENU_DELETE = 4;
 	
 	private EntryListAdapter entryAdapter;
 	private Spinner spinner;
+	
+	private Entry entryForContextMenu;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +59,6 @@ public class EntryListActivity extends Activity {
 		
 		ListView lv = (ListView)findViewById(R.id.listview_entrylist);
 		lv.setAdapter(entryAdapter);
-		
-//		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
-//
-//			@Override
-//			public boolean onItemLongClick(AdapterView<?> adapterView, View view,
-//					int position, long id) {
-//				Entry entry = (Entry)adapterView.getAdapter().getItem(position);
-//				onEntryLongClicked(entry);
-//				return true;
-//			}
-//		});
 		
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
@@ -102,15 +96,26 @@ public class EntryListActivity extends Activity {
 			ContextMenuInfo menuInfo) {
 		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
 		
-		Entry entry = (Entry)entryAdapter.getItem(info.position);
-		menu.setHeaderTitle(entry.value);
-		menu.add("Edit entry");
-		menu.add("Delete entry");
+		entryForContextMenu = (Entry)entryAdapter.getItem(info.position);
+		menu.setHeaderTitle(entryForContextMenu.key);
+		menu.add(0, CONTEXT_MENU_EDIT, 0, "Edit entry");
+		menu.add(0, CONTEXT_MENU_DELETE, 0, "Delete entry");
 		super.onCreateContextMenu(menu, v, menuInfo);
 	}
 	
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+		case CONTEXT_MENU_EDIT:
+			Intent i = new Intent(this, NewEntryActivity.class);
+			i.putExtra(Global.QUICKCOPY_ENTRY_ID, entryForContextMenu.id);
+			startActivityForResult(i, REQUEST_EDIT_ENTRY);
+			break;
+		case CONTEXT_MENU_DELETE:
+			DBHelper.get(this).deleteEntry(entryForContextMenu.id); 
+			refreshList();
+			break;
+		}
 		
 		return super.onContextItemSelected(item);
 	}
@@ -133,7 +138,6 @@ public class EntryListActivity extends Activity {
 		case 2: startActivity(new Intent(this, Preferences.class)); break;
 		}
 		
-		
 		return super.onOptionsItemSelected(item);
 	}
 	
@@ -143,9 +147,13 @@ public class EntryListActivity extends Activity {
 		super.onActivityResult(requestCode, resultCode, data);
 		
 		if (requestCode == REQUEST_NEW_ENTRY && resultCode == RESULT_OK) {
-			ArrayList<Entry> entries = DBHelper.get(this).getEntriesFromGroup((Group)spinner.getSelectedItem());
-			entryAdapter.updateEntries(entries);
+			refreshList();
 		}
+	}
+
+	private void refreshList() {
+		ArrayList<Entry> entries = DBHelper.get(this).getEntriesFromGroup((Group)spinner.getSelectedItem());
+		entryAdapter.updateEntries(entries);
 	}
 	
 	private void fillGroupList() {

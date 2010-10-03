@@ -23,6 +23,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
+import android.text.Html.TagHandler;
+import android.util.Log;
 
 
 public class DBHelper {
@@ -85,6 +87,38 @@ public class DBHelper {
         }
 	}
 	
+	public Entry getEntry(int id) {
+		String selection = "_id = ?";
+		String[] selectionArgs = new String[] {Integer.valueOf(id).toString()};
+		Cursor c = db.query(TABLE_NAME_ENTRIES, null, selection, selectionArgs, null, null, null);
+		int valueId = c.getColumnIndex(COLUMN_NAME_VALUE);
+		int idId = c.getColumnIndex("_id");
+		int hiddenId = c.getColumnIndex(COLUMN_NAME_HIDDEN);
+		int keyId = c.getColumnIndex(COLUMN_NAME_KEY);
+		int groupId = c.getColumnIndex(COLUMN_NAME_GROUP);
+		
+		if (c.moveToFirst()) {
+			return new Entry(c.getInt(idId), c.getString(valueId), c.getInt(hiddenId) == 1, c.getString(keyId), c.getInt(groupId));
+		} else {
+			return null;
+		}
+	}
+	
+	public Group getGroup(int id) {
+		String selection = "_id = ?";
+		String[] selectionArgs = new String[] {Integer.valueOf(id).toString()};
+		Cursor c = db.query(TABLE_NAME_GROUPS, null, selection, selectionArgs, null, null, null);
+		int valueId = c.getColumnIndex(COLUMN_NAME_VALUE);
+		int idId = c.getColumnIndex("_id");
+		
+		if (c.moveToFirst()) {
+			Group g = new Group(c.getInt(idId), c.getString(valueId));
+			return g;
+		} else {
+			return null;
+		}
+	}
+	
 	public ArrayList<Entry> getEntries() {
 		ArrayList<Entry> result = new ArrayList<Entry>();
 		
@@ -93,10 +127,11 @@ public class DBHelper {
 		int idId = c.getColumnIndex("_id");
 		int hiddenId = c.getColumnIndex(COLUMN_NAME_HIDDEN);
 		int keyId = c.getColumnIndex(COLUMN_NAME_KEY);
+		int groupId = c.getColumnIndex(COLUMN_NAME_GROUP);
 		
 		if (c.moveToFirst()) {
 			do {
-				result.add(new Entry(c.getInt(idId), c.getString(valueId), c.getInt(hiddenId) == 1, c.getString(keyId)));
+				result.add(new Entry(c.getInt(idId), c.getString(valueId), c.getInt(hiddenId) == 1, c.getString(keyId),  c.getInt(groupId)));
 			} while(c.moveToNext());
 		}
 		
@@ -111,10 +146,11 @@ public class DBHelper {
 		int idId = c.getColumnIndex("_id");
 		int hiddenId = c.getColumnIndex(COLUMN_NAME_HIDDEN);
 		int keyId = c.getColumnIndex(COLUMN_NAME_KEY);
+		int groupId = c.getColumnIndex(COLUMN_NAME_GROUP);
 		
 		if (c.moveToFirst()) {
 			do {
-				result.add(new Entry(c.getInt(idId), c.getString(valueId), c.getInt(hiddenId) == 1, c.getString(keyId)));
+				result.add(new Entry(c.getInt(idId), c.getString(valueId), c.getInt(hiddenId) == 1, c.getString(keyId),  c.getInt(groupId)));
 			} while(c.moveToNext());
 		}
 		
@@ -134,7 +170,6 @@ public class DBHelper {
 		
 		Collections.sort(result);
 		return result;
-		
 	}
 	
 	public Group getDummyGroup() {
@@ -166,6 +201,17 @@ public class DBHelper {
 		statement.bindLong(2, id);
 		statement.execute();
 	}
+	
+	public void updateEntry(Entry entry) {
+		SQLiteStatement statement = db.compileStatement("UPDATE " + TABLE_NAME_ENTRIES + " SET value = ?, key = ?, _group = ?, hidden = ? WHERE _id = ?;");
+		statement.bindString(1, entry.value);
+		statement.bindString(2, entry.key);
+		statement.bindLong(3, entry.group);
+		statement.bindLong(4, entry.hidden?1:0);
+		statement.bindLong(5, id);
+		statement.execute();
+		Log.e("quickcopy", statement.toString());
+	}
 
 	public void deleteEntry(int id) {
 		SQLiteStatement statement = db.compileStatement("DELETE FROM " + TABLE_NAME_ENTRIES + " WHERE _id = ?;");
@@ -195,4 +241,8 @@ public class DBHelper {
 
 	public int id;
 	public String value;
+
+
+
+
 }

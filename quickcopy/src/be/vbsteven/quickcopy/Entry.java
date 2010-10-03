@@ -6,8 +6,9 @@ public class Entry implements Comparable<Entry> {
 	public String value;
 	public boolean hidden = false;
 	public String key;
+	public int group;
 
-	public Entry(int id, String value, boolean hidden, String key) {
+	public Entry(int id, String value, boolean hidden, String key, int group) {
 		this.id = id;
 		this.value = value;
 		this.hidden = hidden;
