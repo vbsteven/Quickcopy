@@ -9,16 +9,8 @@
         <CheckBoxPreference
             android:key="integration.shownotification"
             android:title="Show notification"
-            android:summary="If set, shows a permanent icon in the notification bar for easy snippet access"
-            android:defaultValue="true"
-            android:persistent="true"
-            android:enabled="true"
-            />
-    	<CheckBoxPreference
-            android:key="integration.showads"
-            android:title="Show ads in main screen"
-            android:summary="If you like this app you can support me by not hiding the ads."
-            android:defaultValue="true"
+            android:summary="Shows a permanent icon in the notification bar for easy access"
+            android:defaultValue="false"
             android:persistent="true"
             android:enabled="true"
             />
@@ -26,10 +18,18 @@
     	<CheckBoxPreference
             android:key="integration.startonboot"
             android:title="Start on boot"
-            android:summary="Automatically start Quickcopy when your device is starting"
+            android:summary="Automatically start notification when device is booting"
             android:defaultValue="false"
             android:persistent="true"
             android:enabled="true"
             />
+         
+         <ListPreference 
+         	android:key="integration.defaultgroup"
+         	android:title="Default group to show"
+         	android:summary="Entries of this group will be shown when the application is opened"
+         	android:persistent="true"
+         	android:enabled="true"
+         	/>
     </PreferenceCategory>   
 </PreferenceScreen>

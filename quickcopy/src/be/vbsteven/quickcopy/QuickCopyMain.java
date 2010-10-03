@@ -25,24 +25,26 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.text.ClipboardManager;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
@@ -51,11 +53,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 
 import com.admob.android.ads.AdView;
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 public class QuickCopyMain extends Activity {
 	
@@ -76,17 +75,11 @@ public class QuickCopyMain extends Activity {
 	
 	private int idLastSelectedGroup = 0;
 	
-	private GoogleAnalyticsTracker tracker;
-
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		tracker = Global.getTracker(this);
-		tracker.trackPageView("/QuickcopyMain");
-		tracker.trackEvent("Version", "Version", Global.getVersionString(this), 0);
-
 		setContentView(R.layout.main);
 		
 		
@@ -141,7 +134,6 @@ public class QuickCopyMain extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		tracker.trackPageView("/QuickcopyMain");
 		checkAdAndNotificationSettings();
 	}
 
@@ -170,8 +162,6 @@ public class QuickCopyMain extends Activity {
 	
 	@Override
 	protected void onDestroy() {
-		tracker.dispatch();
-		tracker.stop();
 		
 		super.onDestroy();
 	}
@@ -221,7 +211,6 @@ public class QuickCopyMain extends Activity {
 								if (!value.equals("")) {
 									DBHelper.get(QuickCopyMain.this).addGroup(
 											value);
-									tracker.trackEvent("Actions", "Add Group", value, 0);
 									refresh();
 								}
 							}
@@ -286,7 +275,6 @@ public class QuickCopyMain extends Activity {
 								if (!value.equals("")) {
 									Entry group = (Entry)spinner.getSelectedItem();
 									idLastSelectedGroup = (int)spinner.getSelectedItemId();
-									tracker.trackEvent("Actions", "Add entry", value, 0);
 									if (group.id < 0) {
 										// group is empty
 //										DBHelper.get(QuickCopyMain.this).addEntry(
@@ -324,7 +312,6 @@ public class QuickCopyMain extends Activity {
 								String value = edit.getText().toString();
 								if (!value.equals("")) {
 //									DBHelper.get(QuickCopyMain.this).updateEntry(entry.id, value);
-									tracker.trackEvent("Actions", "Edit Entry", value, 0);
 									refresh();
 								}
 							}
@@ -340,7 +327,6 @@ public class QuickCopyMain extends Activity {
 								String value = edit.getText().toString();
 								if (!value.equals("")) {
 									DBHelper.get(QuickCopyMain.this).deleteEntry(entry.id);
-									tracker.trackEvent("Actions", "Delete Entry", value, 0);
 									refresh();
 								}
 							}
