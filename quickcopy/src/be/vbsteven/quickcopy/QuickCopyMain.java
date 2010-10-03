@@ -323,7 +323,7 @@ public class QuickCopyMain extends Activity {
 							public void onClick(DialogInterface dialog, int id) {
 								String value = edit.getText().toString();
 								if (!value.equals("")) {
-									DBHelper.get(QuickCopyMain.this).updateEntry(entry.id, value);
+//									DBHelper.get(QuickCopyMain.this).updateEntry(entry.id, value);
 									tracker.trackEvent("Actions", "Edit Entry", value, 0);
 									refresh();
 								}

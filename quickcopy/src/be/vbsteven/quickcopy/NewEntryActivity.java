@@ -88,6 +88,9 @@ public class NewEntryActivity extends Activity {
 		entry.value = valueText.getText().toString();
 		entry.hidden = passwordBox.isChecked();
 		entry.group = g.id;
+		
+		Log.d("quickcopy", entry.key + " " + entry.value + " " + entry.hidden + " " + entry.group + " " + entry.id);
+		
 		DBHelper.get(this).updateEntry(entry); 
 		
 		Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();

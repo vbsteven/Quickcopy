@@ -1,20 +1,3 @@
-/*
-        Quickcopy: Android app for managing frequently used text snippets
-        Copyright (C) 2009 Steven Van Bael
-
-        This program is free software: you can redistribute it and/or modify
-        it under the terms of the GNU General Public License as published by
-        the Free Software Foundation, either version 3 of the License, or
-        (at your option) any later version.
-
-        This program is distributed in the hope that it will be useful,
-        but WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-        GNU General Public License for more details.
-
-        You should have received a copy of the GNU General Public License
-        along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
 package be.vbsteven.quickcopy;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,7 +6,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
-import android.text.Html.TagHandler;
 import android.util.Log;
 
 
@@ -98,8 +80,11 @@ public class DBHelper {
 		int groupId = c.getColumnIndex(COLUMN_NAME_GROUP);
 		
 		if (c.moveToFirst()) {
-			return new Entry(c.getInt(idId), c.getString(valueId), c.getInt(hiddenId) == 1, c.getString(keyId), c.getInt(groupId));
+			Entry result = new Entry(c.getInt(idId), c.getString(valueId), c.getInt(hiddenId) == 1, c.getString(keyId), c.getInt(groupId));
+			c.close();
+			return result;
 		} else {
+			c.close();
 			return null;
 		}
 	}
@@ -113,8 +98,10 @@ public class DBHelper {
 		
 		if (c.moveToFirst()) {
 			Group g = new Group(c.getInt(idId), c.getString(valueId));
+			c.close();
 			return g;
 		} else {
+			c.close();
 			return null;
 		}
 	}
@@ -134,7 +121,7 @@ public class DBHelper {
 				result.add(new Entry(c.getInt(idId), c.getString(valueId), c.getInt(hiddenId) == 1, c.getString(keyId),  c.getInt(groupId)));
 			} while(c.moveToNext());
 		}
-		
+		c.close();
 		return result;
 	}
 	
@@ -154,6 +141,7 @@ public class DBHelper {
 			} while(c.moveToNext());
 		}
 		
+		c.close();
 		return result;
 	}
 	
@@ -169,6 +157,7 @@ public class DBHelper {
 		}
 		
 		Collections.sort(result);
+		c.close();
 		return result;
 	}
 	
@@ -187,30 +176,14 @@ public class DBHelper {
 		statement.execute();
 	}
 	
-//	public void addEntryWithGroup(String entry, int groupId) {
-//		SQLiteStatement statement = db.compileStatement("INSERT INTO " + TABLE_NAME_ENTRIES + " VALUES (?, ?, ?)");
-//		statement.bindNull(1);
-//		statement.bindString(2, entry);
-//		statement.bindString(3, groupId + "");
-//		statement.execute();
-//	}
-	
-	public void updateEntry(int id, String newValue) {
-		SQLiteStatement statement = db.compileStatement("UPDATE " + TABLE_NAME_ENTRIES + " SET value = ? WHERE _id = ?;");
-		statement.bindString(1, newValue);
-		statement.bindLong(2, id);
-		statement.execute();
-	}
-	
 	public void updateEntry(Entry entry) {
 		SQLiteStatement statement = db.compileStatement("UPDATE " + TABLE_NAME_ENTRIES + " SET value = ?, key = ?, _group = ?, hidden = ? WHERE _id = ?;");
 		statement.bindString(1, entry.value);
 		statement.bindString(2, entry.key);
 		statement.bindLong(3, entry.group);
 		statement.bindLong(4, entry.hidden?1:0);
-		statement.bindLong(5, id);
+		statement.bindLong(5, entry.id);
 		statement.execute();
-		Log.e("quickcopy", statement.toString());
 	}
 
 	public void deleteEntry(int id) {
