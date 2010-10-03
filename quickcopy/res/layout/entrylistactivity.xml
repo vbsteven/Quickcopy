@@ -19,4 +19,12 @@
 		android:layout_height="wrap_content"
 		android:layout_width="fill_parent"
 		/>
+		
+	<TextView android:id="@+id/tv_noentries"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:text="You don't have entries in this group yet.\nPress the MENU button and choose ADD ENTRY to begin adding entries"
+		android:visibility="gone"
+		/>
 </LinearLayout>

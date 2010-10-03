@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -49,7 +50,10 @@ public class EntryListActivity extends Activity {
 
 		setTitle("Quickcopy - entry list");
 		
-		// load ui
+		if (Global.getPrefs(this).getBoolean("integration.shownotification", false)) {
+			startService(new Intent(this, NotificationService.class));
+		}
+		
 		setContentView(R.layout.entrylistactivity);
 
 		DBHelper db = DBHelper.get(this);
@@ -206,6 +210,16 @@ public class EntryListActivity extends Activity {
 		ArrayList<Entry> entries = DBHelper.get(this)
 				.getEntriesFromGroup(group);
 		entryAdapter.updateEntries(entries);
+		updateNoEntriesTextView();
+	}
+
+	private void updateNoEntriesTextView() {
+		TextView tv = (TextView)findViewById(R.id.tv_noentries);
+		if (entryAdapter.isEmpty()) {
+			tv.setVisibility(View.VISIBLE);
+		} else {
+			tv.setVisibility(View.GONE);
+		}
 	}
 
 	private void showAddGroupDialog() {

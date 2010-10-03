@@ -82,7 +82,6 @@ public class QuickCopyMain extends Activity {
 		
 		setContentView(R.layout.main);
 		
-		
 		setTitle("Quickcopy");
 		
 		flipper = (ViewFlipper)findViewById(R.id.flipper);

@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 public class BootIntentReceiver extends BroadcastReceiver {
 
@@ -14,16 +13,10 @@ public class BootIntentReceiver extends BroadcastReceiver {
 
 			// check if start-on-boot is enabled in preferences
 			SharedPreferences prefs = Global.getPrefs(context);
-			if (prefs.getBoolean("integration.startonboot", false)) {
-				Log.d("Quickcopy", "starting quickopy on boot");
-				Intent i = new Intent();
-				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				i.setClass(context, QuickCopyMain.class);
-				context.startActivity(i);
-			} else {
-				Log.d("Quickcopy", "NOT starting quickcopy on boot");
-				return;
-			}
+			if (prefs.getBoolean("integration.startonboot", false)
+					&& prefs.getBoolean("integration.shownotification", false)) {
+				context.startService(new Intent(context, NotificationService.class));
+			} 
 		}
 	}
 
