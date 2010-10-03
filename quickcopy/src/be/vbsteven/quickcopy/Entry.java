@@ -21,7 +21,7 @@ public class Entry implements Comparable<Entry> {
 
 	@Override
 	public int compareTo(Entry o) {
-		return (this.value.toLowerCase().compareTo(o.value.toLowerCase()));
+		return (this.key.toLowerCase().compareTo(o.key.toLowerCase()));
 	}
 
 	@Override
