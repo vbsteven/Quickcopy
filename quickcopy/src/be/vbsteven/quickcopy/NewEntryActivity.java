@@ -21,6 +21,7 @@ public class NewEntryActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		QuickcopyUtils.setTheme(this);
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.newentryactivity);
@@ -36,7 +37,7 @@ public class NewEntryActivity extends Activity {
 			but2.setOnClickListener(new OnClickListener() {
 				
 				@Override
-				public void onClick(View v) {
+				public void onClick(View v) { 
 					saveEntry();
 				}
 			});

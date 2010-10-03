@@ -15,6 +15,15 @@ public class QuickcopyUtils {
 		manager.setText(value);
 	}
 	
+	public static void setTheme(Context context) {
+		String theme = Global.getPrefs(context).getString("integration.theme", "Light theme");
+		if (theme.equals("Light theme")) {
+			context.setTheme(android.R.style.Theme_Light);
+		} else {
+			context.setTheme(android.R.style.Theme_Black); 
+		}
+	}
+	
 }
 
 

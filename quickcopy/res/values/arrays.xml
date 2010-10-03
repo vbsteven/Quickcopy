@@ -1,0 +1,7 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android" >
+
+<string-array name="themes">
+<item>Dark theme</item>
+<item>Light theme</item>
+</string-array>
+</resources>

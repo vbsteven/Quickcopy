@@ -5,8 +5,8 @@
 	android:layout_height="fill_parent">
 		<com.admob.android.ads.AdView android:id="@+id/ad" android:visibility="visible" 
 			android:layout_width="fill_parent" android:layout_height="wrap_content" 
-			android:layout_alignParentBottom="true" app:backgroundColor="#000000" 
-			app:textColor="#FFFFFF" app:keywords="Android"
+			android:layout_alignParentBottom="true" app:backgroundColor="#FFFFFF" 
+			app:textColor="#000000" app:keywords="Android"
 			app:testing="true" />
 		 
 	<Spinner android:id="@+id/spinner_category"

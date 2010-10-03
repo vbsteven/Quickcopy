@@ -15,6 +15,7 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		QuickcopyUtils.setTheme(this);
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.prefs);
 		

@@ -27,4 +27,9 @@ public class Global {
 			return "";
 		}
 	}
+
+
+	public static boolean isLightTheme(Context context) {
+		return getPrefs(context).getString("integration.theme", "Light theme").equals("Light theme");
+	}
 }

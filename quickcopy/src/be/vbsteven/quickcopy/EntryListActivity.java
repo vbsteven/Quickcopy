@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.graphics.Color;
 import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -46,6 +47,7 @@ public class EntryListActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		QuickcopyUtils.setTheme(this);
 		super.onCreate(savedInstanceState);
 
 		setTitle("Quickcopy - entry list");
@@ -81,10 +83,22 @@ public class EntryListActivity extends Activity {
 
 		fillGroupList();
 
+		initAds();
+		
+
+	}
+
+	private void initAds() {
 		AdView adview;
 		adview = (AdView) findViewById(R.id.ad);
 		adview.setVisibility(AdView.VISIBLE);
-
+		if (Global.isLightTheme(this)) {
+			adview.setBackgroundColor(Color.WHITE);
+			adview.setTextColor(Color.BLACK);
+		} else {
+			adview.setBackgroundColor(Color.BLACK);
+			adview.setTextColor(Color.WHITE);
+		}
 	}
 
 	protected void onEntryClicked(Entry entry) {
@@ -168,6 +182,8 @@ public class EntryListActivity extends Activity {
 
 		if (requestCode == REQUEST_NEW_ENTRY && resultCode == RESULT_OK) {
 			refreshList();
+		} else if (requestCode == REQUEST_EDIT_ENTRY && resultCode == RESULT_OK) {
+			refreshList();
 		}
 	}
 
@@ -175,6 +191,7 @@ public class EntryListActivity extends Activity {
 		ArrayList<Entry> entries = DBHelper.get(this).getEntriesFromGroup(
 				(Group) spinner.getSelectedItem());
 		entryAdapter.updateEntries(entries);
+		updateNoEntriesTextView();
 	}
 
 	private void fillGroupList() {
