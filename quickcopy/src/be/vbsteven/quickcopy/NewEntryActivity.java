@@ -62,6 +62,10 @@ public class NewEntryActivity extends Activity {
 				}
 			});
 			but.setVisibility(View.VISIBLE);
+			
+			if (getIntent().hasExtra(Global.QUICKCOPY_GROUP)) {
+				setSpinnerToGroup(getIntent().getStringExtra(Global.QUICKCOPY_GROUP));
+			}
 		}
 		
 		

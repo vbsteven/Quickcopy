@@ -140,7 +140,9 @@ public class EntryListActivity extends Activity {
 
 		switch (item.getItemId()) {
 		case 0:
-			startActivityForResult(new Intent(this, NewEntryActivity.class),
+			Intent i = new Intent(this, NewEntryActivity.class);
+			i.putExtra(Global.QUICKCOPY_GROUP, ((Group)spinner.getSelectedItem()).name);
+			startActivityForResult(i,
 					REQUEST_NEW_ENTRY);
 			break;
 		case 1:

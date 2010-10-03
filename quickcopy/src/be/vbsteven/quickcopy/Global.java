@@ -10,6 +10,7 @@ public class Global {
 	public static final String PREFS = "be.vbsteven.quickcopy_preferences";
 	
 	public static final String QUICKCOPY_ENTRY_ID = "QUICKCOPY_ENTRY_ID";
+	public static final String QUICKCOPY_GROUP =  "QUICKCOPY_GROUP";
 	
 	public static final String PASSWORD_HASH = "*****";
 	
