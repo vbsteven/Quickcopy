@@ -25,7 +25,7 @@
 		android:layout_width="wrap_content"
 		android:layout_gravity="center_horizontal"
 		android:gravity="center"
-		android:text="You don't have entries in this group yet.\nPress the MENU button and choose ADD ENTRY to begin adding entries"
+		android:text="You don't have entries in this group yet.\nPress the MENU button and choose NEW ENTRY to begin adding entries"
 		android:visibility="gone"
 		/>
 </LinearLayout>

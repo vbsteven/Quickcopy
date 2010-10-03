@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
 
 
 public class DBHelper {
@@ -75,9 +76,28 @@ public class DBHelper {
 		if (g == null) {
 			// default group does not exist, create
 			addGroup("General");
+			moveOldEntriesWithoutGroup();
 		}
 	}
 	
+	/*
+	 * again a very ugly way to do it but I really couldn't figure out
+	 * how to do the general UPDATE statement with "WHERE group_ = ?"
+	 * 
+	 * I'm sorry for all the kittens that have died in the process of 
+	 * creating this implementation
+	 */
+	private void moveOldEntriesWithoutGroup() {
+		Group g = getGroup("General");
+		
+		ArrayList<Entry> entries = getEntries();
+		for (Entry e: entries) {
+			e.group = g.id;
+			updateEntry(e);
+		}
+		
+	}
+
 	public Entry getEntry(int id) {
 		String selection = "_id = ?";
 		String[] selectionArgs = new String[] {Integer.valueOf(id).toString()};
