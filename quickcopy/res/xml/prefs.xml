@@ -30,6 +30,7 @@
          	android:summary="Entries of this group will be shown when the application is opened"
          	android:persistent="true"
          	android:enabled="true"
+         	android:defaultValue="General"
          	/>
          	
          <ListPreference

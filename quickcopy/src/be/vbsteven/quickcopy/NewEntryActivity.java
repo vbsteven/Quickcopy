@@ -140,7 +140,6 @@ public class NewEntryActivity extends Activity {
 	private void fillGroupList() {
 		DBHelper db = DBHelper.get(this);
 		ArrayList<Group> groups = db.getGroups();
-		groups.add(0, db.getDummyGroup());
 		
 		Spinner s = (Spinner)findViewById(R.id.spinner_category);
 		ArrayAdapter<Group> adapter = new ArrayAdapter<Group>(this, android.R.layout.simple_spinner_item, groups);

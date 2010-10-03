@@ -6,7 +6,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
-import android.util.Log;
 
 
 public class DBHelper {
@@ -24,7 +23,7 @@ public class DBHelper {
 	private static final String CREATE_TABLE_GROUPS = "create table " + TABLE_NAME_GROUPS + "(_id integer primary key autoincrement, " + COLUMN_NAME_VALUE + " text not null);";
 	private static final String ALTER_TABLE_V1 = "alter table " + TABLE_NAME_ENTRIES + " add " + COLUMN_NAME_GROUP + " integer;";
 	private static final String ALTER_TABLE_V2a = "alter table " + TABLE_NAME_ENTRIES + " add " + COLUMN_NAME_HIDDEN + " integer;";
-	private static final String ALTER_TABLE_V2b = "alter table " + TABLE_NAME_ENTRIES + " add " + COLUMN_NAME_KEY + " text"; 
+	private static final String ALTER_TABLE_V2b = "alter table " + TABLE_NAME_ENTRIES + " add " + COLUMN_NAME_KEY + " text";
 	
 	private SQLiteDatabase db;
 	
@@ -67,6 +66,16 @@ public class DBHelper {
         } catch (Exception e) {
         	// modification already done
         }
+
+        addDefaultGroup();
+	}
+	
+	private void addDefaultGroup() {
+		Group g = getGroup("General");
+		if (g == null) {
+			// default group does not exist, create
+			addGroup("General");
+		}
 	}
 	
 	public Entry getEntry(int id) {
@@ -161,11 +170,6 @@ public class DBHelper {
 		return result;
 	}
 	
-	public Group getDummyGroup() {
-		Group group = new Group(-1, "General");
-		return group;
-	}
-
 	public void addEntry(String key, String value, boolean hidden, Group g) {
 		SQLiteStatement statement = db.compileStatement("INSERT INTO " + TABLE_NAME_ENTRIES + " VALUES (?, ?, ?, ?, ?)");
 		statement.bindNull(1); // id
@@ -192,11 +196,26 @@ public class DBHelper {
 		statement.execute();
 	}
 
-	public void addGroup(String value) {
+	public void addGroup(String value) {		
 		SQLiteStatement statement = db.compileStatement("INSERT INTO " + TABLE_NAME_GROUPS + " VALUES (?, ?)");
 		statement.bindNull(1);
 		statement.bindString(2, value);
 		statement.execute();
+	}
+	
+	public Group getGroup(String name) {
+		String selection = COLUMN_NAME_VALUE + " = ?";
+		String[] selectionArgs = new String[] { name };
+		Group result = null;
+		Cursor c = db.query(TABLE_NAME_GROUPS, new String[] {COLUMN_NAME_VALUE, "_id"}, selection, selectionArgs, null, null, null);
+		int valueId = c.getColumnIndex(COLUMN_NAME_VALUE);
+		int idId =  c.getColumnIndex("_id");
+		if (c.moveToFirst()) {
+				result = new Group(c.getInt(idId), c.getString(valueId));
+		}
+		
+		c.close();
+		return result;
 	}
 	
 	public void deleteGroup(int id) {

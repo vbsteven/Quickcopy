@@ -9,7 +9,6 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.graphics.Color;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -59,8 +58,9 @@ public class EntryListActivity extends Activity {
 		setContentView(R.layout.entrylistactivity);
 
 		DBHelper db = DBHelper.get(this);
-
-		ArrayList<Entry> entries = db.getEntriesFromGroup(db.getDummyGroup());
+		
+		String defaultGroup = Global.getPrefs(this).getString("integration.defaultgroup", "General");
+		ArrayList<Entry> entries = db.getEntriesFromGroup(DBHelper.get(this).getGroup(defaultGroup));
 
 		entryAdapter = new EntryListAdapter(this, entries);
 
@@ -197,7 +197,6 @@ public class EntryListActivity extends Activity {
 	private void fillGroupList() {
 		DBHelper db = DBHelper.get(this);
 		ArrayList<Group> groups = db.getGroups();
-		groups.add(0, db.getDummyGroup());
 		
 		spinner = (Spinner)findViewById(R.id.spinner_category);
 		ArrayAdapter<Group> adapter = new ArrayAdapter<Group>(this, android.R.layout.simple_spinner_item, groups);
