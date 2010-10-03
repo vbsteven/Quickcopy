@@ -171,6 +171,8 @@ public class EntryListActivity extends Activity {
 		case 2:
 			startActivity(new Intent(this, Preferences.class));
 			break;
+		case 3:
+			startActivity(new Intent(this, HelpActivity.class));
 		}
 
 		return super.onOptionsItemSelected(item);

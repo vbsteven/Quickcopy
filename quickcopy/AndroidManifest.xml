@@ -13,6 +13,7 @@
         </activity>
         
         <activity android:name=".NewEntryActivity" />
+        <activity android:name=".HelpActivity" />
         
 		<receiver android:name=".BootIntentReceiver">        
         	<intent-filter>

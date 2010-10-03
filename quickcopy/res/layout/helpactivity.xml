@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+	xmlns:app="http://schemas.android.com/apk/res/be.vbsteven.quickcopy"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:padding="15dp"
+	>
+		
+		
+	<TextView
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:layout_marginBottom="10dp"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:text="Basic usage"
+		/>
+			
+	<TextView
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceSmall"
+		android:text="1. Use the menu button to add new entries to the list\n2. Tap an existing entry to copy that entry onto the clipboard\n3. Long press on an existing entry to edit or delete that entry"
+		/>
+		
+	<TextView
+		android:layout_marginTop="10dp"
+		android:layout_marginBottom="10dp"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:text="About this application"
+		/>
+		
+	<TextView
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceSmall"
+		android:text="Quickcopy is an application written in my spare time with the intention of improving the text-input functionality on Android."
+		/>
+	<TextView
+		android:layout_marginTop="10dp"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceSmall"
+		android:text="This free version is ad-supported. A paid version without ads will be on the Android market soon."
+		/>
+</LinearLayout>
