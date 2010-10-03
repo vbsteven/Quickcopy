@@ -47,6 +47,8 @@ public class EntryListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		setTitle("Quickcopy - entry list");
+		
 		// load ui
 		setContentView(R.layout.entrylistactivity);
 

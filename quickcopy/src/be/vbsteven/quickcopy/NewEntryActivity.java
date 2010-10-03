@@ -29,6 +29,9 @@ public class NewEntryActivity extends Activity {
 		
 		if (getIntent().hasExtra(Global.QUICKCOPY_ENTRY_ID)) {
 			// we are called with an id, this is an edit
+			
+			setTitle("Quickcopy - edit entry");
+			
 			Button but2 = (Button)findViewById(R.id.but_save);
 			but2.setOnClickListener(new OnClickListener() {
 				
@@ -53,6 +56,7 @@ public class NewEntryActivity extends Activity {
 				setSpinnerToGroup(g.name);
 			}
 		} else {
+			setTitle("Quickcopy - new entry");
 			Button but = (Button)findViewById(R.id.but_create);
 			but.setOnClickListener(new OnClickListener() {
 				
