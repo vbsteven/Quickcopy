@@ -11,6 +11,8 @@ import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 public class NewEntryActivity extends Activity {
 
 	private Entry entry; // entry for the case we are called to edit an existing entry
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,18 @@ public class NewEntryActivity extends Activity {
 			}
 		}
 		
+		CheckBox useTitleForValueBox = (CheckBox) findViewById(R.id.checkbox_sameTitle);
+		useTitleForValueBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				EditText titleText = (EditText)findViewById(R.id.et_title);
+				EditText valueText = (EditText)findViewById(R.id.et_value);
+				
+				valueText.setText(titleText.getText().toString());
+			}
+		});
+		
 		
 		
 	}
@@ -81,9 +96,14 @@ public class NewEntryActivity extends Activity {
 	protected void saveEntry() {
 		EditText titleText = (EditText)findViewById(R.id.et_title);
 		EditText valueText = (EditText)findViewById(R.id.et_value);
+		CheckBox checkBox = (CheckBox)findViewById(R.id.checkbox_sameTitle);
+		
+		if (checkBox.isChecked()) {
+			valueText.setText(titleText.getText().toString());
+		}
 		
 		if (titleText.getText().toString().equals("") || valueText.getText().toString().equals("")) {
-			QuickcopyUtils.showUserDialog(this, "Error creating entry", "Some of the fields are empty.");
+			QuickcopyUtils.showUserDialog(this, "Error saving entry", "Some of the fields are empty.");
 			return;
 		}
 		
@@ -115,6 +135,11 @@ public class NewEntryActivity extends Activity {
 	protected void createEntry() {
 		EditText titleText = (EditText)findViewById(R.id.et_title);
 		EditText valueText = (EditText)findViewById(R.id.et_value);
+		CheckBox checkBox = (CheckBox)findViewById(R.id.checkbox_sameTitle);
+		
+		if (checkBox.isChecked()) {
+			valueText.setText(titleText.getText().toString());
+		}
 		
 		if (titleText.getText().toString().equals("") || valueText.getText().toString().equals("")) {
 			QuickcopyUtils.showUserDialog(this, "Error creating entry", "Some of the fields are empty.");
