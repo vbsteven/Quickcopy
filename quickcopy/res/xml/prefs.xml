@@ -4,8 +4,6 @@
         android:key="GLOBAL"
         >
         
-    <PreferenceCategory android:title="Integration">
-            
         <CheckBoxPreference
             android:key="integration.shownotification"
             android:title="Show notification"
@@ -43,5 +41,13 @@
          	android:entries="@array/themes"
          	android:entryValues="@array/themes"
          	/>
-    </PreferenceCategory>   
+         	
+         	<CheckBoxPreference 
+         		android:key="integration.onlyshowtitles"
+         		android:title="Only show titles"
+         		android:summary="Only shows titles in the list"
+         		android:persistent="true"
+         		android:defaultValue="false"
+         		android:enabled="true"
+         		/>
 </PreferenceScreen>

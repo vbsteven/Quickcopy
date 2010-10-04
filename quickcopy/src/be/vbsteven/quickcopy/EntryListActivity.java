@@ -351,6 +351,12 @@ public class EntryListActivity extends Activity {
 			} else {
 				valueView.setText(entry.value);
 			}
+			
+			if (Global.userSelectedShowTitles(EntryListActivity.this)) {
+				valueView.setVisibility(View.GONE);
+			} else {
+				valueView.setVisibility(View.VISIBLE);
+			}
 
 			return result;
 		}

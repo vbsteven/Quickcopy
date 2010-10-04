@@ -32,4 +32,12 @@ public class Global {
 	public static boolean isLightTheme(Context context) {
 		return getPrefs(context).getString("integration.theme", "Dark theme").equals("Light theme");
 	}
+
+
+	/*
+	 * returns true if the user chooses to only show titles in the list
+	 */
+	public static boolean userSelectedShowTitles(Context context) {
+		return Global.getPrefs(context).getBoolean("integration.onlyshowtitles", false);
+	}
 }
