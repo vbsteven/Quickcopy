@@ -84,8 +84,8 @@ public class EntryListActivity extends Activity {
 		fillGroupList();
 
 		initAds();
-		
 
+		showWelcomeMessage();
 	}
 
 	private void initAds() {
@@ -272,6 +272,17 @@ public class EntryListActivity extends Activity {
 
 	protected void addGroup(String string) {
 		DBHelper.get(this).addGroup(string);
+	}
+	
+	protected void showWelcomeMessage() {
+		if (!Global.getPrefs(this).getBoolean("hasDisplayedWelcomeMessage0.8.1", false)) {
+			Global.getPrefs(this).edit().putBoolean("hasDisplayedWelcomeMessage0.8.1", true).commit();
+			
+			new AlertDialog.Builder(this).setTitle("Quickcopy v0.8.1")
+				.setPositiveButton("OK", null)
+				.setMessage(R.string.welcome_message)
+				.show();
+		}
 	}
 
 	public class EntryListAdapter extends BaseAdapter {

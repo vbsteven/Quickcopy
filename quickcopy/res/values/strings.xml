@@ -20,4 +20,6 @@
 <resources>
     <string name="app_name">Quickcopy</string>
     <string name="groupspinner_prompt">Select group</string>
+    
+    <string name="welcome_message">New in v0.8.1:\n*Fixed issue with save/create button falling offscreen when having large entries\n\nv0.8 is the first release after I started rewriting Quickcopy from scratch.\n\nNew features include:\n* New UI\n* Entry titles\n* Password support\n* Themes\n\nFeatures you can expect over the coming weeks:\n* Backup/Restore method\n* Group management\n* Quickcopy inputmethod/keyboard\n\nThis free version is ad-supported. A paid version will appear on the Android market very soon.</string>
 </resources>

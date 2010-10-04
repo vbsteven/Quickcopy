@@ -30,6 +30,6 @@ public class Global {
 
 
 	public static boolean isLightTheme(Context context) {
-		return getPrefs(context).getString("integration.theme", "Light theme").equals("Light theme");
+		return getPrefs(context).getString("integration.theme", "Dark theme").equals("Light theme");
 	}
 }

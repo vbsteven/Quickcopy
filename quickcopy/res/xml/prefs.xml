@@ -39,7 +39,7 @@
          	android:summary="set the theme used for Quickcopy"
          	android:persistent="true"
          	android:enabled="true"
-         	android:defaultValue="Light theme"
+         	android:defaultValue="Dark theme"
          	android:entries="@array/themes"
          	android:entryValues="@array/themes"
          	/>
