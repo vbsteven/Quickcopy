@@ -150,6 +150,8 @@ public class DBHelper {
 			} while(c.moveToNext());
 		}
 		c.close();
+		
+		Collections.sort(result);
 		return result;
 	}
 	
@@ -170,6 +172,7 @@ public class DBHelper {
 		}
 		
 		c.close();
+		Collections.sort(result);
 		return result;
 	}
 	
