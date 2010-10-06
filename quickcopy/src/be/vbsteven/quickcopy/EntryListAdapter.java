@@ -3,7 +3,6 @@ package be.vbsteven.quickcopy;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,6 +19,8 @@ public class EntryListAdapter extends BaseAdapter {
 
 	private TextView titleView;
 	private TextView valueView;
+	
+	private Listener listener;
 
 	public EntryListAdapter(Context context, ArrayList<Entry> entries) {
 		this.context = context;
@@ -54,7 +55,7 @@ public class EntryListAdapter extends BaseAdapter {
 			return null;
 		}
 
-		Entry entry = entries.get(index);
+		final Entry entry = entries.get(index);
 		View result;
 
 		// init or convert view
@@ -81,13 +82,17 @@ public class EntryListAdapter extends BaseAdapter {
 			valueView.setVisibility(View.VISIBLE);
 		}
 
-//		result.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				Log.d("quickcopy", "onClicklistener on separate item");
-//			}
-//		});
+		if (listener != null) {
+			// this means we are called inside the inputmethod
+			
+			result.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					notifyOnEntryClicked(entry);
+				}
+			});
+		}
 		
 		return result;
 	}
@@ -95,6 +100,20 @@ public class EntryListAdapter extends BaseAdapter {
 	public void updateEntries(ArrayList<Entry> entries) {
 		this.entries = entries;
 		notifyDataSetChanged();
+	}
+	
+	public void setListener(Listener listener) {
+		this.listener = listener;
+	}
+	
+	private void notifyOnEntryClicked(Entry entry) {
+		if (listener != null) {
+			listener.onEntryClicked(entry);
+		}
+	}
+	
+	public interface Listener {
+		public void onEntryClicked(Entry entry);
 	}
 
 }

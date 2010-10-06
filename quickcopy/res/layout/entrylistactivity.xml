@@ -18,6 +18,7 @@
 	<ListView android:id="@+id/listview_entrylist"
 		android:layout_height="wrap_content"
 		android:layout_width="fill_parent"
+		android:clickable="true"
 		/>
 		
 	<TextView android:id="@+id/tv_noentries"

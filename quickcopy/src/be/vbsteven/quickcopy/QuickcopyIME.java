@@ -4,17 +4,16 @@ import java.util.ArrayList;
 
 import android.inputmethodservice.InputMethodService;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.view.inputmethod.InputConnection;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import be.vbsteven.quickcopy.EntryListAdapter.Listener;
 
-public class QuickcopyIME extends InputMethodService {
+public class QuickcopyIME extends InputMethodService implements Listener {
 
 	private TextView noEntriesTextView;
 	private ListView listview;
@@ -43,7 +42,7 @@ public class QuickcopyIME extends InputMethodService {
 			
 			@Override
 			public void onClick(View v) {
-				vibrator.vibrate(100);
+				vibrator.vibrate(50);
 				previousGroup();
 			}
 		});
@@ -53,7 +52,7 @@ public class QuickcopyIME extends InputMethodService {
 			
 			@Override
 			public void onClick(View v) {
-				vibrator.vibrate(100);
+				vibrator.vibrate(50);
 				nextGroup();
 			}
 		});
@@ -61,14 +60,6 @@ public class QuickcopyIME extends InputMethodService {
 		initAdapter();
 		
 		updateNoEntriesTextView();
-		qkview.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Log.d("quickcopy", "onClick");
-			}
-		});
-		
 		initGroups();
 		vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 		
@@ -148,14 +139,17 @@ public class QuickcopyIME extends InputMethodService {
 		ArrayList<Entry> entries = db.getEntriesFromGroup(DBHelper.get(this).getGroup(defaultGroup));
 
 		entryAdapter = new EntryListAdapter(this, entries);
+		entryAdapter.setListener(this);
 
 		listview.setAdapter(entryAdapter);
 	}
 
 
 
-	protected void onEntryClicked(Entry entry) {
-		Log.d("quickcopy", "item is clicked");
+	public void onEntryClicked(Entry entry) {
+		vibrator.vibrate(50);
+		InputConnection ic = getCurrentInputConnection();
+		ic.commitText(entry.value, 1);
 	}
 
 
