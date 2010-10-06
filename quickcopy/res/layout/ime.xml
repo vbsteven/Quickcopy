@@ -44,7 +44,7 @@
 		android:layout_height="wrap_content" android:layout_width="fill_parent"
 		android:layout_gravity="center_horizontal" android:gravity="center"
 		android:text="You don't have entries in this group yet.\nGo to the Quickcopy application to begin adding entries"
-		android:visibility="visible" />
+		android:visibility="gone" />
 		
 		
 </LinearLayout>

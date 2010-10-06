@@ -97,6 +97,8 @@ public class QuickcopyIME extends InputMethodService implements Listener {
 		
 		ArrayList<Entry> entries = DBHelper.get(this).getEntriesFromGroup(currentGroup);
 		entryAdapter.updateEntries(entries);
+		
+		updateNoEntriesTextView();
 	}
 
 

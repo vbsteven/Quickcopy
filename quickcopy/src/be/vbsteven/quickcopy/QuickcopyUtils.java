@@ -16,7 +16,7 @@ public class QuickcopyUtils {
 	}
 	
 	public static void setTheme(Context context) {
-		String theme = Global.getPrefs(context).getString("integration.theme", "Dark theme");
+		String theme = Global.getPrefs(context).getString("integration.theme", "Light theme");
 		if (theme.equals("Light theme")) {
 			context.setTheme(android.R.style.Theme_Light);
 		} else {

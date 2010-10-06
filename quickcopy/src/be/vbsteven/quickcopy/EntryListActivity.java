@@ -79,7 +79,9 @@ public class EntryListActivity extends Activity {
 
 		fillGroupList();
 
-		initAds();
+		if (Global.isFreeVersion()) {
+			initAds();
+		}
 
 		showWelcomeMessage();
 	}
@@ -271,13 +273,17 @@ public class EntryListActivity extends Activity {
 	}
 	
 	protected void showWelcomeMessage() {
-		if (!Global.getPrefs(this).getBoolean("hasDisplayedWelcomeMessage0.8.1", false)) {
-			Global.getPrefs(this).edit().putBoolean("hasDisplayedWelcomeMessage0.8.1", true).commit();
+		if (!Global.getPrefs(this).getBoolean("hasDisplayedWelcomeMessage0.8.2", false)) {
+			Global.getPrefs(this).edit().putBoolean("hasDisplayedWelcomeMessage0.8.2", true).commit();
 			
-			new AlertDialog.Builder(this).setTitle("Quickcopy v0.8.1")
-				.setPositiveButton("OK", null)
-				.setMessage(R.string.welcome_message)
-				.show();
+			AlertDialog d = new AlertDialog.Builder(this).setTitle("Quickcopy v0.8.2")
+				.setPositiveButton("OK", null).create();
+				if (Global.isFreeVersion()) {
+					d.setMessage(getResources().getString(R.string.welcome_message_free));
+				} else {
+					d.setMessage(getResources().getString(R.string.welcome_message_paid));
+				}
+				d.show();
 		}
 	}
 
