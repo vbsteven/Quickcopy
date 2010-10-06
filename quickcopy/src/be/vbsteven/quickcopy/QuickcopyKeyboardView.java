@@ -1,6 +1,7 @@
 package be.vbsteven.quickcopy;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
@@ -26,8 +27,15 @@ public class QuickcopyKeyboardView extends LinearLayout {
 	
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-		super.setMeasuredDimension(400, 275);
+		int orientation = context.getResources().getConfiguration().orientation;
+		
+		if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+			super.setMeasuredDimension(700, 160);
+		} else {
+			super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+			super.setMeasuredDimension(400, 260);
+		}
 	}
 	
 	@Override

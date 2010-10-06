@@ -160,4 +160,5 @@ public class QuickcopyIME extends InputMethodService implements Listener {
 			noEntriesTextView.setVisibility(View.GONE);
 		}
 	}
+	
 }
