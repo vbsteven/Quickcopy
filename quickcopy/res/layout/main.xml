@@ -21,6 +21,7 @@
     
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
+	<include android:id="@+id/topbar" layout="@layout/topbar" />
 	<TextView android:id="@+id/textEntries" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:text=""
 		android:gravity="center_vertical|center_horizontal" 

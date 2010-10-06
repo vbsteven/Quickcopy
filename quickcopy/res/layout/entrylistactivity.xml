@@ -1,8 +1,18 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+>
+<include android:id="@+id/topbar" layout="@layout/topbar" android:layout_alignParentTop="true"/>
+
+
+<LinearLayout  
 	xmlns:app="http://schemas.android.com/apk/res/be.vbsteven.quickcopy"
     
 	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
+	android:layout_height="fill_parent"
+	android:layout_below="@id/topbar"
+	>
+	
 		<com.admob.android.ads.AdView android:id="@+id/ad" android:visibility="visible" 
 			android:layout_width="fill_parent" android:layout_height="wrap_content" 
 			android:layout_alignParentBottom="true" app:backgroundColor="#FFFFFF" 
@@ -30,3 +40,4 @@
 		android:visibility="gone"
 		/>
 </LinearLayout>
+</RelativeLayout>
