@@ -1,11 +1,40 @@
  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="275dp" 
-	android:background="#ddd"
+	android:background="#000"
 	>
-	<Spinner android:id="@+id/spinner_category"
-		android:layout_height="wrap_content" android:layout_width="fill_parent"
-		android:prompt="@string/groupspinner_prompt" />
+	<RelativeLayout 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:background="#333"
+		android:orientation="horizontal">
+		
+		<Button
+			android:id="@+id/but_previous_group"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="&lt;&lt;"
+			android:layout_alignParentLeft="true"
+			/>
+		
+		<TextView
+			android:id="@+id/tv_group"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content" 
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:gravity="center_horizontal"
+			android:layout_centerHorizontal="true"
+			android:layout_centerVertical="true"
+			android:text="General" />
+			
+		<Button
+		    android:id="@+id/but_next_group"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="&gt;&gt;"
+			android:layout_alignParentRight="true"
+			/>
+	</RelativeLayout>
 
 	<ListView android:id="@+id/listview_entrylist"
 		android:layout_height="wrap_content" android:layout_width="fill_parent" 
@@ -16,8 +45,6 @@
 		android:layout_gravity="center_horizontal" android:gravity="center"
 		android:text="You don't have entries in this group yet.\nGo to the Quickcopy application to begin adding entries"
 		android:visibility="visible" />
-
-
 		
 		
 </LinearLayout>

@@ -3,9 +3,9 @@ package be.vbsteven.quickcopy;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
-public class QuickcopyKeyboardView extends FrameLayout {
+public class QuickcopyKeyboardView extends LinearLayout {
 
 	private Context context;
 	
@@ -35,7 +35,8 @@ public class QuickcopyKeyboardView extends FrameLayout {
 		super.onDraw(canvas);
 	}
 	
-	
 
+	
+	
 
 }

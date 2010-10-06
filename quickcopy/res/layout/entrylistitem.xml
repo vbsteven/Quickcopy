@@ -10,8 +10,8 @@
 		android:orientation="vertical"
 		android:paddingLeft="10dip"
 		android:paddingRight="60dip"
-		android:paddingBottom="5dp"
-		android:paddingTop="5dp"
+		android:paddingBottom="8dp"
+		android:paddingTop="8dp"
 		android:layout_alignParentLeft="true"
 		>
 		<TextView android:id="@+id/entrylistitem_title"
