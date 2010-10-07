@@ -1,4 +1,4 @@
-package be.vbsteven.quickcopy;
+package be.vbsteven.quickcopyfull;
 
 import android.content.Context;
 import android.content.res.Configuration;

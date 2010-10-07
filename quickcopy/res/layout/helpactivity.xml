@@ -38,7 +38,7 @@
 		android:layout_width="wrap_content"
 		android:textAppearance="?android:attr/textAppearanceMedium"
 		android:text="Using the Quickcopy keyboard (only FULL version)"
-		/>
+		/> 
 		
 	<TextView
 		android:layout_marginBottom="10dp"

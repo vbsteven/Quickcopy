@@ -1,11 +1,14 @@
-package be.vbsteven.quickcopy;
+package be.vbsteven.quickcopyfull;
 
 import java.util.ArrayList;
+
+import be.vbsteven.quickcopyfull.R;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
@@ -25,6 +28,7 @@ public class NewEntryActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		QuickcopyUtils.setTheme(this);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.newentryactivity);
@@ -33,8 +37,6 @@ public class NewEntryActivity extends Activity {
 		
 		if (getIntent().hasExtra(Global.QUICKCOPY_ENTRY_ID)) {
 			// we are called with an id, this is an edit
-			
-			setTitle("Quickcopy - edit entry");
 			
 			Button but2 = (Button)findViewById(R.id.but_save);
 			but2.setOnClickListener(new OnClickListener() {

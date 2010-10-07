@@ -1,5 +1,6 @@
-package be.vbsteven.quickcopy;
+package be.vbsteven.quickcopyfull;
 
+import be.vbsteven.quickcopyfull.R;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;

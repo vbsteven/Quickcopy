@@ -1,4 +1,4 @@
-package be.vbsteven.quickcopy;
+package be.vbsteven.quickcopyfull;
 import java.util.ArrayList;
 import java.util.Collections;
 

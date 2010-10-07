@@ -1,4 +1,5 @@
-package be.vbsteven.quickcopy;
+package be.vbsteven.quickcopyfull;
+import be.vbsteven.quickcopyfull.R;
 import android.app.Activity;
 import android.os.Bundle;
 

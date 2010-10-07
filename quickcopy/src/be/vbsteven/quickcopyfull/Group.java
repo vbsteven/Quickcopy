@@ -1,4 +1,4 @@
-package be.vbsteven.quickcopy;
+package be.vbsteven.quickcopyfull;
 
 public class Group implements Comparable<Group> {
 	public int id;

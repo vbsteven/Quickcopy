@@ -1,4 +1,4 @@
-package be.vbsteven.quickcopy;
+package be.vbsteven.quickcopyfull;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,14 +7,14 @@ import android.content.pm.PackageManager.NameNotFoundException;
 public class Global {
 	
 	public static final String TAG = "be.vbsteven.quickcopy";
-	public static final String PREFS = "be.vbsteven.quickcopy_preferences";
+	public static final String PREFS = "be.vbsteven.quickcopyfull_preferences";
 	
 	public static final String QUICKCOPY_ENTRY_ID = "QUICKCOPY_ENTRY_ID";
 	public static final String QUICKCOPY_GROUP =  "QUICKCOPY_GROUP";
 	
 	public static final String PASSWORD_HASH = "*****";
 	
-	public static final boolean QUICKCOPY_FULL = false;
+	public static final boolean QUICKCOPY_FULL = true;
 	
 	
 	public static boolean isFullVersion() {

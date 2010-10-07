@@ -43,11 +43,6 @@
 			android:layout_height="wrap_content"
 			android:text="Back" />
 		
-		<com.admob.android.ads.AdView android:id="@+id/ad" android:visibility="gone" 
-			android:layout_width="fill_parent" android:layout_height="wrap_content" 
-			android:layout_alignParentBottom="true" app:backgroundColor="#000000" 
-			app:textColor="#FFFFFF" app:keywords="Android"
-			app:testing="true" />
 	</LinearLayout>
 		
 </RelativeLayout>

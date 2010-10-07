@@ -1,6 +1,8 @@
-package be.vbsteven.quickcopy;
+package be.vbsteven.quickcopyfull;
 
 import java.util.ArrayList;
+
+import be.vbsteven.quickcopyfull.R;
 
 import android.content.Intent;
 import android.content.SharedPreferences;

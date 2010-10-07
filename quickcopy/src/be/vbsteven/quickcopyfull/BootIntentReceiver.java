@@ -1,4 +1,4 @@
-package be.vbsteven.quickcopy;
+package be.vbsteven.quickcopyfull;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

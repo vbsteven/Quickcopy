@@ -1,4 +1,4 @@
-package be.vbsteven.quickcopy;
+package be.vbsteven.quickcopyfull;
 
 import java.util.ArrayList;
 
@@ -7,13 +7,13 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -24,8 +24,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.admob.android.ads.AdView;
 
 public class EntryListActivity extends Activity {
 
@@ -43,6 +41,7 @@ public class EntryListActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		QuickcopyUtils.setTheme(this);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 
 		setTitle("Quickcopy - entry list");
@@ -87,16 +86,16 @@ public class EntryListActivity extends Activity {
 	}
 
 	private void initAds() {
-		AdView adview;
-		adview = (AdView) findViewById(R.id.ad);
-		adview.setVisibility(AdView.VISIBLE);
-		if (Global.isLightTheme(this)) {
-			adview.setBackgroundColor(Color.WHITE);
-			adview.setTextColor(Color.BLACK);
-		} else {
-			adview.setBackgroundColor(Color.BLACK);
-			adview.setTextColor(Color.WHITE);
-		}
+//		AdView adview;
+//		adview = (AdView) findViewById(R.id.ad);
+//		adview.setVisibility(AdView.VISIBLE);
+//		if (Global.isLightTheme(this)) {
+//			adview.setBackgroundColor(Color.WHITE);
+//			adview.setTextColor(Color.BLACK);
+//		} else {
+//			adview.setBackgroundColor(Color.BLACK);
+//			adview.setTextColor(Color.WHITE);
+//		}
 	}
 
 	protected void onEntryClicked(Entry entry) {
