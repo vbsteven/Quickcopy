@@ -2,14 +2,6 @@ package be.vbsteven.qccommon;
 
 import java.util.ArrayList;
 
-import be.vbsteven.quickcopyfull.DBHelper;
-import be.vbsteven.quickcopyfull.Global;
-import be.vbsteven.quickcopyfull.R;
-import be.vbsteven.quickcopyfull.R.drawable;
-import be.vbsteven.quickcopyfull.R.id;
-import be.vbsteven.quickcopyfull.R.layout;
-import be.vbsteven.quickcopyfull.R.string;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -32,6 +24,9 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import be.vbsteven.quickcopyfull.DBHelper;
+import be.vbsteven.quickcopyfull.Global;
+import be.vbsteven.quickcopyfull.R;
 
 public class EntryListActivity extends Activity {
 
@@ -40,6 +35,7 @@ public class EntryListActivity extends Activity {
 
 	private static final int CONTEXT_MENU_EDIT = 3;
 	private static final int CONTEXT_MENU_DELETE = 4;
+	private static final int CONTEXT_MENU_SHARE = 5;
 
 	private EntryListAdapter entryAdapter;
 	private Spinner spinner;
@@ -128,6 +124,7 @@ public class EntryListActivity extends Activity {
 		entryForContextMenu = (Entry) entryAdapter.getItem(info.position);
 		menu.setHeaderTitle(entryForContextMenu.key);
 		menu.add(0, CONTEXT_MENU_EDIT, 0, "Edit entry");
+		menu.add(0, CONTEXT_MENU_SHARE, 0, "Share entry");
 		menu.add(0, CONTEXT_MENU_DELETE, 0, "Delete entry");
 		super.onCreateContextMenu(menu, v, menuInfo);
 	}
@@ -143,6 +140,15 @@ public class EntryListActivity extends Activity {
 		case CONTEXT_MENU_DELETE:
 			DBHelper.get(this).deleteEntry(entryForContextMenu.id);
 			refreshList();
+			break;
+		case CONTEXT_MENU_SHARE:
+			Entry entry = DBHelper.get(this).getEntry(entryForContextMenu.id);
+			if (entry != null) {
+				Intent share = new Intent(Intent.ACTION_SEND);
+				share.setType("text/plain");
+				share.putExtra(Intent.EXTRA_TEXT, entry.value);
+				startActivity(share);
+			}
 			break;
 		}
 
