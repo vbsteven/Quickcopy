@@ -83,7 +83,7 @@ public class NewEntryActivity extends Activity {
 			}
 
 			// check if we are called with a share intent
-			if (getIntent().getAction().equals("android.intent.action.SEND")) {
+			if (getIntent().getAction() != null && getIntent().getAction().equals("android.intent.action.SEND")) {
 				if (getIntent().hasExtra(Intent.EXTRA_TEXT)) {
 					String value = getIntent().getStringExtra(Intent.EXTRA_TEXT);
 					EditText valueText = (EditText)findViewById(R.id.et_value);

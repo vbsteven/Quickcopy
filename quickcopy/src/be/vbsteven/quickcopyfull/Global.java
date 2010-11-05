@@ -15,8 +15,7 @@ public class Global {
 	public static final String PASSWORD_HASH = "*****";
 	
 	public static final boolean QUICKCOPY_FULL = true;
-	
-	
+
 	public static boolean isFullVersion() {
 		return QUICKCOPY_FULL;
 	}

@@ -247,6 +247,10 @@ public class DBHelper {
 		SQLiteStatement statement = db.compileStatement("DELETE FROM " + TABLE_NAME_GROUPS + " WHERE _id = ?;");
 		statement.bindLong(1, id);
 		statement.execute();
+		
+		SQLiteStatement statement2 = db.compileStatement("DELETE FROM " + TABLE_NAME_ENTRIES + " WHERE " + COLUMN_NAME_GROUP + " = ?;");
+		statement.bindLong(1, id);
+		statement.execute();
 	}
 	
 	public void updateGroup(int id, String newValue) {

@@ -56,6 +56,16 @@ public class EntryListActivity extends Activity {
 		
 		setContentView(R.layout.entrylistactivity);
 
+		init();
+
+		if (Global.isFreeVersion()) {
+			initAds();
+		}
+
+		showWelcomeMessage();
+	}
+
+	private void init() {
 		DBHelper db = DBHelper.get(this);
 		
 		String defaultGroup = Global.getPrefs(this).getString("integration.defaultgroup", "General");
@@ -81,12 +91,13 @@ public class EntryListActivity extends Activity {
 		registerForContextMenu(lv);
 
 		fillGroupList();
-
-		if (Global.isFreeVersion()) {
-			initAds();
-		}
-
-		showWelcomeMessage();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		init();
+		
 	}
 
 	private void initAds() {
@@ -159,6 +170,7 @@ public class EntryListActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(0, 0, 0, "New entry").setIcon(R.drawable.ic_menu_add);
 		menu.add(0, 1, 0, "New group").setIcon(R.drawable.ic_menu_add);
+		menu.add(0, 4, 0, "Group management");
 		menu.add(0, 2, 1, "Preferences")
 				.setIcon(R.drawable.ic_menu_preferences);
 		menu.add(0, 3, 1, "Help").setIcon(R.drawable.ic_menu_info_details);
@@ -184,6 +196,10 @@ public class EntryListActivity extends Activity {
 			break;
 		case 3:
 			startActivity(new Intent(this, HelpActivity.class));
+			break;
+		case 4:
+			startActivity(new Intent(this, GroupManagementActivity.class));
+			break;
 		}
 
 		return super.onOptionsItemSelected(item);

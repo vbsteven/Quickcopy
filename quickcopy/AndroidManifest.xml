@@ -22,6 +22,9 @@
 		<activity android:name="be.vbsteven.qccommon.HelpActivity" />
 		<activity android:name="be.vbsteven.qccommon.Preferences" />
 
+		<activity android:name="be.vbsteven.qccommon.GroupManagementActivity" />
+		<activity android:name="be.vbsteven.qccommon.NewGroupActivity" />
+
 		<receiver android:name="be.vbsteven.qccommon.BootIntentReceiver">
 			<intent-filter>
 				<action android:name="android.intent.action.BOOT_COMPLETED" />
