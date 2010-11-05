@@ -9,6 +9,7 @@ import be.vbsteven.quickcopyfull.R.id;
 import be.vbsteven.quickcopyfull.R.layout;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -79,6 +80,15 @@ public class NewEntryActivity extends Activity {
 			
 			if (getIntent().hasExtra(Global.QUICKCOPY_GROUP)) {
 				setSpinnerToGroup(getIntent().getStringExtra(Global.QUICKCOPY_GROUP));
+			}
+
+			// check if we are called with a share intent
+			if (getIntent().getAction().equals("android.intent.action.SEND")) {
+				if (getIntent().hasExtra(Intent.EXTRA_TEXT)) {
+					String value = getIntent().getStringExtra(Intent.EXTRA_TEXT);
+					EditText valueText = (EditText)findViewById(R.id.et_value);
+					valueText.setText(value);
+				}
 			}
 		}
 		
