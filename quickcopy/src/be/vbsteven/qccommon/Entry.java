@@ -1,4 +1,4 @@
-package be.vbsteven.quickcopyfull;
+package be.vbsteven.qccommon;
 
 public class Entry implements Comparable<Entry> {
 

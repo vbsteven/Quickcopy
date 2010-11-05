@@ -1,8 +1,11 @@
-package be.vbsteven.quickcopyfull;
+package be.vbsteven.qccommon;
 
 import java.util.ArrayList;
 
+import be.vbsteven.quickcopyfull.DBHelper;
+import be.vbsteven.quickcopyfull.Global;
 import be.vbsteven.quickcopyfull.R;
+import be.vbsteven.quickcopyfull.R.xml;
 
 import android.content.Intent;
 import android.content.SharedPreferences;

@@ -5,28 +5,28 @@
 	android:versionName="0.8.3">
 	<application android:icon="@drawable/icon" android:label="@string/app_name">
 
-		<activity android:name=".EntryListActivity" android:label="@string/app_name">
+		<activity android:name="be.vbsteven.qccommon.EntryListActivity" android:label="@string/app_name">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
 
-		<activity android:name=".NewEntryActivity" />
-		<activity android:name=".HelpActivity" />
-		<activity android:name=".Preferences" />
+		<activity android:name="be.vbsteven.qccommon.NewEntryActivity" />
+		<activity android:name="be.vbsteven.qccommon.HelpActivity" />
+		<activity android:name="be.vbsteven.qccommon.Preferences" />
 
-		<receiver android:name=".BootIntentReceiver">
+		<receiver android:name="be.vbsteven.qccommon.BootIntentReceiver">
 			<intent-filter>
 				<action android:name="android.intent.action.BOOT_COMPLETED" />
 			</intent-filter>
 		</receiver>
 
 
-		<service android:name=".NotificationService" />
+		<service android:name="be.vbsteven.qccommon.NotificationService" />
 		
 		
-		<service android:name="QuickcopyIME" android:label="@string/quickcopy_input_label"
+		<service android:name="be.vbsteven.qccommon.QuickcopyIME" android:label="@string/quickcopy_input_label"
 			android:permission="android.permission.BIND_INPUT_METHOD">
 			<intent-filter>
 				<action android:name="android.view.InputMethod" />

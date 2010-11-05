@@ -1,8 +1,12 @@
-package be.vbsteven.quickcopyfull;
+package be.vbsteven.qccommon;
 
 import java.util.ArrayList;
 
+import be.vbsteven.quickcopyfull.DBHelper;
+import be.vbsteven.quickcopyfull.Global;
 import be.vbsteven.quickcopyfull.R;
+import be.vbsteven.quickcopyfull.R.id;
+import be.vbsteven.quickcopyfull.R.layout;
 
 import android.app.Activity;
 import android.os.Bundle;

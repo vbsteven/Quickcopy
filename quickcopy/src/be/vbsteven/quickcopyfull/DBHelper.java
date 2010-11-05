@@ -2,6 +2,9 @@ package be.vbsteven.quickcopyfull;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import be.vbsteven.qccommon.Entry;
+import be.vbsteven.qccommon.Group;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

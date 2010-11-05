@@ -1,8 +1,11 @@
-package be.vbsteven.quickcopyfull;
+package be.vbsteven.qccommon;
 
 import java.util.ArrayList;
 
+import be.vbsteven.quickcopyfull.Global;
 import be.vbsteven.quickcopyfull.R;
+import be.vbsteven.quickcopyfull.R.id;
+import be.vbsteven.quickcopyfull.R.layout;
 
 import android.content.Context;
 import android.view.LayoutInflater;

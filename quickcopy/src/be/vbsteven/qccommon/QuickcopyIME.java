@@ -1,4 +1,4 @@
-package be.vbsteven.quickcopyfull;
+package be.vbsteven.qccommon;
 
 import java.util.ArrayList;
 
@@ -11,8 +11,12 @@ import android.view.inputmethod.InputConnection;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import be.vbsteven.qccommon.EntryListAdapter.Listener;
+import be.vbsteven.quickcopyfull.DBHelper;
+import be.vbsteven.quickcopyfull.Global;
 import be.vbsteven.quickcopyfull.R;
-import be.vbsteven.quickcopyfull.EntryListAdapter.Listener;
+import be.vbsteven.quickcopyfull.R.id;
+import be.vbsteven.quickcopyfull.R.layout;
 
 public class QuickcopyIME extends InputMethodService implements Listener {
 

@@ -1,4 +1,5 @@
-package be.vbsteven.quickcopyfull;
+package be.vbsteven.qccommon;
+import be.vbsteven.quickcopyfull.Global;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.text.ClipboardManager;
