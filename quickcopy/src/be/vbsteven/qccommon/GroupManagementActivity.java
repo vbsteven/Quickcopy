@@ -2,12 +2,18 @@ package be.vbsteven.qccommon;
 
 import java.util.ArrayList;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import be.vbsteven.quickcopyfull.DBHelper;
 import be.vbsteven.quickcopyfull.Global;
@@ -45,5 +51,32 @@ public class GroupManagementActivity extends ListActivity {
 		Intent i = new Intent(this, NewGroupActivity.class);
 		i.putExtra(Global.QUICKCOPY_GROUP, g.id);
 		startActivity(i);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add(0, 1, 0, "New group").setIcon(R.drawable.ic_menu_add);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		showAddGroupDialog();
+		return true;
+	}
+	
+	private void showAddGroupDialog() {
+		final View v = View.inflate(this, R.layout.addgroupdialog, null);
+		final EditText text = (EditText) v.findViewById(R.id.et_groupname);
+		new AlertDialog.Builder(this).setTitle("Add group").setView(text)
+				.setPositiveButton("Add", new OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						String name = text.getText().toString();
+						DBHelper.get(GroupManagementActivity.this).addGroup(name);
+						init();
+					}
+				}).setNegativeButton("Cancel", null).show();
 	}
 }

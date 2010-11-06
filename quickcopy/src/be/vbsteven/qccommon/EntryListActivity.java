@@ -170,7 +170,7 @@ public class EntryListActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(0, 0, 0, "New entry").setIcon(R.drawable.ic_menu_add);
 		menu.add(0, 1, 0, "New group").setIcon(R.drawable.ic_menu_add);
-		menu.add(0, 4, 0, "Group management");
+		menu.add(0, 4, 0, "Group management").setIcon(R.drawable.ic_menu_archive);
 		menu.add(0, 2, 1, "Preferences")
 				.setIcon(R.drawable.ic_menu_preferences);
 		menu.add(0, 3, 1, "Help").setIcon(R.drawable.ic_menu_info_details);
