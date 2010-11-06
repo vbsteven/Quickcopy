@@ -160,6 +160,9 @@ public class DBHelper {
 	
 	public ArrayList<Entry> getEntriesFromGroup(Group group) {
 		ArrayList<Entry> result = new ArrayList<Entry>();
+		if (group == null) {
+			return result;
+		}
 		
 		Cursor c = db.query(TABLE_NAME_ENTRIES, null, COLUMN_NAME_GROUP + " = ?", new String[] {group.id + ""}, null, null, null);
 		int valueId = c.getColumnIndex(COLUMN_NAME_VALUE);
