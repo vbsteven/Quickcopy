@@ -183,10 +183,19 @@ public class EntryListActivity extends Activity {
 
 		switch (item.getItemId()) {
 		case 0:
-			Intent i = new Intent(this, NewEntryActivity.class);
-			i.putExtra(Global.QUICKCOPY_GROUP, ((Group)spinner.getSelectedItem()).name);
-			startActivityForResult(i,
-					REQUEST_NEW_ENTRY);
+			if (spinner.getAdapter().getCount()  > 0) {
+				Intent i = new Intent(this, NewEntryActivity.class);
+				i.putExtra(Global.QUICKCOPY_GROUP,
+						((Group) spinner.getSelectedItem()).name);
+				startActivityForResult(i,		REQUEST_NEW_ENTRY);
+			} else {
+				// there is no group
+				new AlertDialog.Builder(EntryListActivity.this)
+					.setTitle("No groups available")
+					.setMessage("Please add a group first before you add new entries")
+					.setPositiveButton("OK", null)
+					.create().show();
+			}
 			break;
 		case 1:
 			showAddGroupDialog();
