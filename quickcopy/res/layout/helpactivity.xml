@@ -69,7 +69,7 @@
 		android:layout_width="wrap_content"
 		android:textAppearance="?android:attr/textAppearanceSmall"
 		android:autoLink="all"
-		android:text="If you have any questions or comments about this application feel free to mail me on steven.v.bael@gmail.com or mention me on twitter @vbsteven."
+		android:text="If you have any questions or comments about this application feel free to mail me on steven.v.bael@gmail.com or mention me on twitter.\nhttp://twitter.com/vbsteven\nhttp://twitter.com/quickcopyapp"
 		/>
 		
 

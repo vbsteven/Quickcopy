@@ -311,10 +311,10 @@ public class EntryListActivity extends Activity {
 	}
 	
 	protected void showWelcomeMessage() {
-		if (!Global.getPrefs(this).getBoolean("hasDisplayedWelcomeMessage0.8.2", false)) {
-			Global.getPrefs(this).edit().putBoolean("hasDisplayedWelcomeMessage0.8.2", true).commit();
+		if (!Global.getPrefs(this).getBoolean("hasDisplayedWelcomeMessage0.8.4", false)) {
+			Global.getPrefs(this).edit().putBoolean("hasDisplayedWelcomeMessage0.8.4", true).commit();
 			
-			AlertDialog d = new AlertDialog.Builder(this).setTitle("Quickcopy v0.8.2")
+			AlertDialog d = new AlertDialog.Builder(this).setTitle("Quickcopy v0.8.4")
 				.setPositiveButton("OK", null).create();
 				if (Global.isFreeVersion()) {
 					d.setMessage(getResources().getString(R.string.welcome_message_free));
