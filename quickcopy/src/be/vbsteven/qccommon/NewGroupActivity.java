@@ -8,9 +8,9 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import be.vbsteven.quickcopyfull.DBHelper;
-import be.vbsteven.quickcopyfull.Global;
-import be.vbsteven.quickcopyfull.R;
+import be.vbsteven.quickcopy.DBHelper;
+import be.vbsteven.quickcopy.Global;
+import be.vbsteven.quickcopy.R;
 
 public class NewGroupActivity extends Activity {
 	

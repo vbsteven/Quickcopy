@@ -2,19 +2,15 @@ package be.vbsteven.qccommon;
 
 import java.util.ArrayList;
 
-import be.vbsteven.quickcopyfull.DBHelper;
-import be.vbsteven.quickcopyfull.Global;
-import be.vbsteven.quickcopyfull.R;
-import be.vbsteven.quickcopyfull.R.xml;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
+import be.vbsteven.quickcopy.DBHelper;
+import be.vbsteven.quickcopy.Global;
+import be.vbsteven.quickcopy.R;
 
 public class Preferences extends PreferenceActivity implements OnSharedPreferenceChangeListener {
 	

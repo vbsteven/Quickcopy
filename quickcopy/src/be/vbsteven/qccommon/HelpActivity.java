@@ -1,8 +1,7 @@
 package be.vbsteven.qccommon;
-import be.vbsteven.quickcopyfull.R;
-import be.vbsteven.quickcopyfull.R.layout;
 import android.app.Activity;
 import android.os.Bundle;
+import be.vbsteven.quickcopy.R;
 
 
 public class HelpActivity extends Activity {

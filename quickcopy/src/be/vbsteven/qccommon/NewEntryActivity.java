@@ -2,19 +2,13 @@ package be.vbsteven.qccommon;
 
 import java.util.ArrayList;
 
-import be.vbsteven.quickcopyfull.DBHelper;
-import be.vbsteven.quickcopyfull.Global;
-import be.vbsteven.quickcopyfull.R;
-import be.vbsteven.quickcopyfull.R.id;
-import be.vbsteven.quickcopyfull.R.layout;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,6 +18,9 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+import be.vbsteven.quickcopy.DBHelper;
+import be.vbsteven.quickcopy.Global;
+import be.vbsteven.quickcopy.R;
 
 public class NewEntryActivity extends Activity {
 

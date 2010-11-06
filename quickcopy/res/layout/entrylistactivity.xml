@@ -13,6 +13,12 @@
 	android:layout_below="@id/topbar"
 	>
 	
+	<com.admob.android.ads.AdView android:id="@+id/ad" android:visibility="visible" 
+			android:layout_width="fill_parent" android:layout_height="wrap_content" 
+			android:layout_alignParentBottom="true" app:backgroundColor="#FFFFFF" 
+			app:textColor="#000000" app:keywords="Android applications money"
+			app:testing="false" />
+	
 		 
 	<Spinner android:id="@+id/spinner_category"
 	  android:layout_height="wrap_content"

@@ -1,6 +1,6 @@
 package be.vbsteven.qccommon;
 
-import be.vbsteven.quickcopyfull.Global;
+import be.vbsteven.quickcopy.Global;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;

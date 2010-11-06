@@ -2,11 +2,6 @@ package be.vbsteven.qccommon;
 
 import java.util.ArrayList;
 
-import be.vbsteven.quickcopyfull.Global;
-import be.vbsteven.quickcopyfull.R;
-import be.vbsteven.quickcopyfull.R.id;
-import be.vbsteven.quickcopyfull.R.layout;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +9,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import be.vbsteven.quickcopy.Global;
+import be.vbsteven.quickcopy.R;
 
 public class EntryListAdapter extends BaseAdapter {
 

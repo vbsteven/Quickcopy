@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -24,9 +25,11 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import be.vbsteven.quickcopyfull.DBHelper;
-import be.vbsteven.quickcopyfull.Global;
-import be.vbsteven.quickcopyfull.R;
+import be.vbsteven.quickcopy.DBHelper;
+import be.vbsteven.quickcopy.Global;
+import be.vbsteven.quickcopy.R;
+
+import com.admob.android.ads.AdView;
 
 public class EntryListActivity extends Activity {
 
@@ -101,16 +104,16 @@ public class EntryListActivity extends Activity {
 	}
 
 	private void initAds() {
-//		AdView adview;
-//		adview = (AdView) findViewById(R.id.ad);
-//		adview.setVisibility(AdView.VISIBLE);
-//		if (Global.isLightTheme(this)) {
-//			adview.setBackgroundColor(Color.WHITE);
-//			adview.setTextColor(Color.BLACK);
-//		} else {
-//			adview.setBackgroundColor(Color.BLACK);
-//			adview.setTextColor(Color.WHITE);
-//		}
+		AdView adview;
+		adview = (AdView) findViewById(R.id.ad);
+		adview.setVisibility(AdView.VISIBLE);
+		if (Global.isLightTheme(this)) {
+			adview.setBackgroundColor(Color.WHITE);
+			adview.setTextColor(Color.BLACK);
+		} else {
+			adview.setBackgroundColor(Color.BLACK);
+			adview.setTextColor(Color.WHITE);
+		}
 	}
 
 	protected void onEntryClicked(Entry entry) {

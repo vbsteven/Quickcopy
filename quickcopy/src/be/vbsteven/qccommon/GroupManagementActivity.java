@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,9 +15,9 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import be.vbsteven.quickcopyfull.DBHelper;
-import be.vbsteven.quickcopyfull.Global;
-import be.vbsteven.quickcopyfull.R;
+import be.vbsteven.quickcopy.DBHelper;
+import be.vbsteven.quickcopy.Global;
+import be.vbsteven.quickcopy.R;
 
 public class GroupManagementActivity extends ListActivity {
 
