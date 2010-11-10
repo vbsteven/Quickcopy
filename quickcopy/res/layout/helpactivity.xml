@@ -15,6 +15,23 @@
 	android:layout_height="fill_parent"
 	android:padding="15dp"
 	>
+	
+	<TextView
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:layout_marginBottom="10dp"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:text="Share the love for this app"
+		/>
+
+	<Button
+		android:id="@+id/button_share"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+		android:text="Share"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:layout_marginBottom="10dp"
+		/>
 		
 	<TextView
 		android:layout_height="wrap_content"
