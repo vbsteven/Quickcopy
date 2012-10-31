@@ -11,7 +11,6 @@ import be.vbsteven.quickcopyfull.R;
 public class HelpActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		QuickcopyUtils.setTheme(this);
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.helpactivity);

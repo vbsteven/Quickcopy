@@ -27,8 +27,9 @@ import android.widget.Toast;
 import be.vbsteven.quickcopyfull.DBHelper;
 import be.vbsteven.quickcopyfull.Global;
 import be.vbsteven.quickcopyfull.R;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 
-public class EntryListActivity extends Activity {
+public class EntryListActivity extends SherlockFragmentActivity {
 
 	private static final int REQUEST_NEW_ENTRY = 0;
 	private static final int REQUEST_EDIT_ENTRY = 2;
@@ -44,8 +45,6 @@ public class EntryListActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		QuickcopyUtils.setTheme(this);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 
 		setTitle("Quickcopy - entry list");
@@ -166,20 +165,20 @@ public class EntryListActivity extends Activity {
 		return super.onContextItemSelected(item);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0, 0, 0, "New entry").setIcon(R.drawable.ic_menu_add);
-		menu.add(0, 1, 0, "New group").setIcon(R.drawable.ic_menu_add);
-		menu.add(0, 4, 0, "Group management").setIcon(R.drawable.ic_menu_archive);
-		menu.add(0, 2, 1, "Preferences")
-				.setIcon(R.drawable.ic_menu_preferences);
-		menu.add(0, 3, 1, "Help").setIcon(R.drawable.ic_menu_info_details);
+    @Override
+    public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+        menu.add(0, 0, 0, "New entry").setIcon(R.drawable.ic_menu_add);
+        menu.add(0, 1, 0, "New group").setIcon(R.drawable.ic_menu_add);
+        menu.add(0, 4, 0, "Group management").setIcon(R.drawable.ic_menu_archive);
+        menu.add(0, 2, 1, "Preferences")
+                .setIcon(R.drawable.ic_menu_preferences);
+        menu.add(0, 3, 1, "Help").setIcon(R.drawable.ic_menu_info_details);
 
-		return super.onCreateOptionsMenu(menu);
-	}
+        return super.onCreateOptionsMenu(menu);
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+    @Override
+    public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
 
 		switch (item.getItemId()) {
 		case 0:
