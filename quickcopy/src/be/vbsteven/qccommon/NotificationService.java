@@ -43,10 +43,11 @@ public class NotificationService extends Service {
         NotificationCompat2.Builder builder = new NotificationCompat2.Builder(this);
         builder.setOngoing(true);
         builder.setAutoCancel(false);
-        builder.setSmallIcon(drawable.icon);
+        builder.setSmallIcon(R.drawable.ic_stat_notificationicon);
         builder.setContentTitle("Quickcopy");
         builder.setContentText("Snippet repository");
         builder.setContentIntent(intent);
+        builder.setPriority(Notification.PRIORITY_MIN);
         Notification notif = builder.build();
 
         nManager.notify(0, notif);
