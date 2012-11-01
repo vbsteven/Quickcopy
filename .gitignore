@@ -1,4 +1,8 @@
+
 .metadata/*
 .DS_Store
 */bin/*
 */gen/*
+*/.idea/*
+quickcopy/out/
+quickcopy/quickcopy.iml
