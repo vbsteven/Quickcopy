@@ -32,6 +32,8 @@ import be.vbsteven.quickcopyfull.DBHelper;
 import be.vbsteven.quickcopyfull.Global;
 import be.vbsteven.quickcopyfull.R;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.viewpagerindicator.PageIndicator;
+import com.viewpagerindicator.TitlePageIndicator;
 
 public class EntryListActivity extends SherlockFragmentActivity {
 
@@ -42,6 +44,7 @@ public class EntryListActivity extends SherlockFragmentActivity {
     private ArrayList<EntryListFragment> mFragments;
 
     private ViewPager mViewPager;
+    private PageIndicator mPageIndicator;
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,7 @@ public class EntryListActivity extends SherlockFragmentActivity {
 		setContentView(R.layout.entrylistactivity);
 
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        mPageIndicator = (PageIndicator) findViewById(R.id.titles);
 
 		init();
 
@@ -84,7 +88,7 @@ public class EntryListActivity extends SherlockFragmentActivity {
             mFragments.add(frag);
         }
 
-        FragmentPagerAdapter adapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
+        FragmentPagerAdapter adapter = new FragmentPagerAdapter(getSupportFragmentManager())  {
 
             @Override
             public Fragment getItem(int i) {
@@ -95,9 +99,17 @@ public class EntryListActivity extends SherlockFragmentActivity {
             public int getCount() {
                 return mFragments.size();
             }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return mFragments.get(position).getGroup().name;
+            }
+
+
         };
 
         mViewPager.setAdapter(adapter);
+        mPageIndicator.setViewPager(mViewPager);
     }
 	
 	@Override
