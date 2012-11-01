@@ -123,9 +123,11 @@ public class EntryListFragment extends SherlockListFragment {
     }
 
     public void refreshList() {
-        ArrayList<Entry> entries = mDbHelper.getEntriesFromGroup(mGroup);
-        EntryListAdapter adapter = new EntryListAdapter(getActivity(), entries);
-        setListAdapter(adapter);
+        if (mDbHelper != null) {
+            ArrayList<Entry> entries = mDbHelper.getEntriesFromGroup(mGroup);
+            EntryListAdapter adapter = new EntryListAdapter(getActivity(), entries);
+            setListAdapter(adapter);
+        }
     }
 
     public Group getGroup() {

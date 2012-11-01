@@ -63,14 +63,6 @@ public class EntryListActivity extends SherlockFragmentActivity {
 
 		init();
 
-        String defaultGroup = Global.getPrefs(this).getString("integration.defaultgroup", "General");
-        for (int i = 0; i < mFragments.size(); i++) {
-            if (mFragments.get(i).getGroup().name.equals(defaultGroup)) {
-                mViewPager.setCurrentItem(i);
-                break;
-            }
-        }
-
 		if (Global.isFreeVersion()) {
 			initAds();
 		}
@@ -78,7 +70,18 @@ public class EntryListActivity extends SherlockFragmentActivity {
 		showWelcomeMessage();
 	}
 
-	private void init() {
+    private void focusDefaultGroupFragment() {
+        String defaultGroup = Global.getPrefs(this).getString("integration.defaultgroup", "General");
+        for (int i = 0; i < mFragments.size(); i++) {
+            if (mFragments.get(i).getGroup().name.equals(defaultGroup)) {
+                mViewPager.setCurrentItem(i, false);
+                mPageIndicator.setCurrentItem(i);
+                break;
+            }
+        }
+    }
+
+    private void init() {
 
 		refreshGroups();
 
@@ -249,4 +252,10 @@ public class EntryListActivity extends SherlockFragmentActivity {
 		}
 	}
 
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+
+        focusDefaultGroupFragment();
+    }
 }
