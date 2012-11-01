@@ -47,6 +47,13 @@ public class EntryListFragment extends SherlockListFragment {
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        registerForContextMenu(getListView());
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
     }
@@ -55,7 +62,6 @@ public class EntryListFragment extends SherlockListFragment {
     public void onResume() {
         super.onResume();
 
-        registerForContextMenu(getListView());
         setEmptyText("No entries");
 
 
@@ -101,11 +107,11 @@ public class EntryListFragment extends SherlockListFragment {
                 Intent i = new Intent(getActivity(), NewEntryActivity.class);
                 i.putExtra(Global.QUICKCOPY_ENTRY_ID, mEntryForContextMenu.id);
                 startActivityForResult(i, EntryListActivity.REQUEST_EDIT_ENTRY);
-                break;
+                return true;
             case CONTEXT_MENU_DELETE:
                 DBHelper.get(getActivity()).deleteEntry(mEntryForContextMenu.id);
                 refreshList();
-                break;
+                return true;
             case CONTEXT_MENU_SHARE:
                 Entry entry = DBHelper.get(getActivity()).getEntry(mEntryForContextMenu.id);
                 if (entry != null) {
@@ -114,12 +120,20 @@ public class EntryListFragment extends SherlockListFragment {
                     share.putExtra(Intent.EXTRA_TEXT, entry.value);
                     startActivity(share);
                 }
-                break;
+                return true;
         }
 
         return super.onContextItemSelected(item);
 
 
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        refreshList();
     }
 
     public void refreshList() {
