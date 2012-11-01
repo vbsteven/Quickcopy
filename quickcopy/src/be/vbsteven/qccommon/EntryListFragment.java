@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.*;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -15,8 +16,6 @@ import com.actionbarsherlock.app.SherlockListFragment;
 import java.util.ArrayList;
 
 public class EntryListFragment extends SherlockListFragment {
-
-
 
 
     private static final int CONTEXT_MENU_EDIT = 3;
@@ -58,6 +57,7 @@ public class EntryListFragment extends SherlockListFragment {
 
         registerForContextMenu(getListView());
         setEmptyText("No entries");
+
 
     }
 

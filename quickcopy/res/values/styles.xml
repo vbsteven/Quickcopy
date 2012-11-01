@@ -22,13 +22,13 @@
     <!-- "Implementation" of VPI theme. We just set the text size and color. -->
     <style name="CustomTitlePageIndicator" parent="Widget.TabPageIndicator">
         <item name="android:background">#ccf4f2f1</item>
-        <item name="footerColor">#cc333333</item>
+<!--        <item name="footerColor">#cc333333</item> -->
         <item name="footerLineHeight">1dp</item>
-        <item name="footerIndicatorHeight">3dp</item>
+        <item name="footerIndicatorHeight">2dp</item>
         <item name="footerIndicatorStyle">underline</item>
         <item name="android:textColor">#ff555555</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="selectedColor">#555555</item>
         <item name="selectedBold">false</item>
 

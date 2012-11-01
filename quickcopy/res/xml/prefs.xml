@@ -31,17 +31,7 @@
          	android:defaultValue="General"
          	/>
          	
-         <ListPreference
-         	android:key="integration.theme"
-         	android:title="Theme"
-         	android:summary="set the theme used for Quickcopy"
-         	android:persistent="true"
-         	android:enabled="true"
-         	android:defaultValue="Light theme"
-         	android:entries="@array/themes"
-         	android:entryValues="@array/themes"
-         	/>
-         	
+
          	<CheckBoxPreference 
          		android:key="integration.onlyshowtitles"
          		android:title="Only show titles"

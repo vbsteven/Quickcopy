@@ -3,9 +3,6 @@ package be.vbsteven.qccommon;
 import java.util.ArrayList;
 
 import be.vbsteven.quickcopyfull.Global;
-import be.vbsteven.quickcopyfull.R;
-import be.vbsteven.quickcopyfull.R.id;
-import be.vbsteven.quickcopyfull.R.layout;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import be.vbsteven.quickcopyfull.R;
 
 public class EntryListAdapter extends BaseAdapter {
 
@@ -67,12 +65,12 @@ public class EntryListAdapter extends BaseAdapter {
 		if (convertView != null) {
 			result = convertView;
 		} else {
-			result = inflater.inflate(R.layout.entrylistitem, parent, false);
+			result = inflater.inflate(R.layout.list_item_singleline, parent, false);
 		}
 
 		// fill up values
-		titleView = (TextView) result.findViewById(R.id.entrylistitem_title);
-		valueView = (TextView) result.findViewById(R.id.entrylistitem_value);
+		titleView = (TextView) result.findViewById(R.id.tv_list_item_title);
+		valueView = (TextView) result.findViewById(R.id.tv_list_item_value);
 
 		titleView.setText(entry.key);
 		if (entry.hidden) {
