@@ -4,33 +4,12 @@
 >
 
 
-<LinearLayout  
-	xmlns:app="http://schemas.android.com/apk/res/be.vbsteven.quickcopy"
-    
-	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	>
-	
-		 
-	<Spinner android:id="@+id/spinner_category"
-	  android:layout_height="wrap_content"
-	  android:layout_width="fill_parent"
-	  android:prompt="@string/groupspinner_prompt"
-	  />
-	  
-	<ListView android:id="@+id/listview_entrylist"
-		android:layout_height="wrap_content"
-		android:layout_width="fill_parent"
-		android:clickable="true"
-		/>
-		
-	<TextView android:id="@+id/tv_noentries"
-		android:layout_height="fill_parent"
-		android:layout_width="wrap_content"
-		android:layout_gravity="center_horizontal"
-		android:gravity="center"
-		android:text="You don't have entries in this group yet.\nPress the MENU button and choose NEW ENTRY to begin adding entries"
-		android:visibility="gone"
-		/>
-</LinearLayout>
+
+    <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            />
+
 </RelativeLayout>
+

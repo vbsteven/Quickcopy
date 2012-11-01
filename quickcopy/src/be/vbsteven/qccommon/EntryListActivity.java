@@ -8,6 +8,10 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -31,19 +35,15 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 public class EntryListActivity extends SherlockFragmentActivity {
 
-	private static final int REQUEST_NEW_ENTRY = 0;
-	private static final int REQUEST_EDIT_ENTRY = 2;
 
-	private static final int CONTEXT_MENU_EDIT = 3;
-	private static final int CONTEXT_MENU_DELETE = 4;
-	private static final int CONTEXT_MENU_SHARE = 5;
+    public static final int REQUEST_EDIT_ENTRY = 2;
+    public static final int REQUEST_NEW_ENTRY = 0;
 
-	private EntryListAdapter entryAdapter;
-	private Spinner spinner;
+    private ArrayList<EntryListFragment> mFragments;
 
-	private Entry entryForContextMenu;
+    private ViewPager mViewPager;
 
-	@Override
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
@@ -55,6 +55,8 @@ public class EntryListActivity extends SherlockFragmentActivity {
 		
 		setContentView(R.layout.entrylistactivity);
 
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+
 		init();
 
 		if (Global.isFreeVersion()) {
@@ -65,32 +67,38 @@ public class EntryListActivity extends SherlockFragmentActivity {
 	}
 
 	private void init() {
-		DBHelper db = DBHelper.get(this);
-		
+
+		refreshGroups();
 		String defaultGroup = Global.getPrefs(this).getString("integration.defaultgroup", "General");
-		ArrayList<Entry> entries = db.getEntriesFromGroup(DBHelper.get(this).getGroup(defaultGroup));
 
-		entryAdapter = new EntryListAdapter(this, entries);
-
-		ListView lv = (ListView) findViewById(R.id.listview_entrylist);
-		lv.setAdapter(entryAdapter);
-
-		lv.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view,
-					int position, long id) {
-				Entry entry = (Entry) adapterView.getAdapter()
-						.getItem(position);
-				onEntryClicked(entry);
-				return;
-			}
-		});
-
-		registerForContextMenu(lv);
-
-		fillGroupList();
 	}
+
+    private void refreshGroups() {
+        DBHelper db = DBHelper.get(this);
+
+        ArrayList<Group> groups = db.getGroups();
+
+        mFragments = new ArrayList<EntryListFragment>();
+        for (Group g: groups) {
+            EntryListFragment frag = new EntryListFragment(g);
+            mFragments.add(frag);
+        }
+
+        FragmentPagerAdapter adapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
+
+            @Override
+            public Fragment getItem(int i) {
+                return mFragments.get(i);
+            }
+
+            @Override
+            public int getCount() {
+                return mFragments.size();
+            }
+        };
+
+        mViewPager.setAdapter(adapter);
+    }
 	
 	@Override
 	protected void onResume() {
@@ -112,58 +120,7 @@ public class EntryListActivity extends SherlockFragmentActivity {
 //		}
 	}
 
-	protected void onEntryClicked(Entry entry) {
-		QuickcopyUtils.copyToClipBoard(this, entry.value);
-		Toast.makeText(
-				this,
-				"The value of item \"" + entry.key
-						+ "\" is copied to the clipboard", Toast.LENGTH_LONG)
-				.show();
-		finish();
-	}
 
-	protected void onEntryLongClicked(Entry entry) {
-
-	}
-
-	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v,
-			ContextMenuInfo menuInfo) {
-		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-
-		entryForContextMenu = (Entry) entryAdapter.getItem(info.position);
-		menu.setHeaderTitle(entryForContextMenu.key);
-		menu.add(0, CONTEXT_MENU_EDIT, 0, "Edit entry");
-		menu.add(0, CONTEXT_MENU_SHARE, 0, "Share entry");
-		menu.add(0, CONTEXT_MENU_DELETE, 0, "Delete entry");
-		super.onCreateContextMenu(menu, v, menuInfo);
-	}
-
-	@Override
-	public boolean onContextItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case CONTEXT_MENU_EDIT:
-			Intent i = new Intent(this, NewEntryActivity.class);
-			i.putExtra(Global.QUICKCOPY_ENTRY_ID, entryForContextMenu.id);
-			startActivityForResult(i, REQUEST_EDIT_ENTRY);
-			break;
-		case CONTEXT_MENU_DELETE:
-			DBHelper.get(this).deleteEntry(entryForContextMenu.id);
-			refreshList();
-			break;
-		case CONTEXT_MENU_SHARE:
-			Entry entry = DBHelper.get(this).getEntry(entryForContextMenu.id);
-			if (entry != null) {
-				Intent share = new Intent(Intent.ACTION_SEND);
-				share.setType("text/plain");
-				share.putExtra(Intent.EXTRA_TEXT, entry.value);
-				startActivity(share);
-			}
-			break;
-		}
-
-		return super.onContextItemSelected(item);
-	}
 
     @Override
     public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
@@ -182,10 +139,10 @@ public class EntryListActivity extends SherlockFragmentActivity {
 
 		switch (item.getItemId()) {
 		case 0:
-			if (spinner.getAdapter().getCount()  > 0) {
+			if (mFragments.size() > 0) {
 				Intent i = new Intent(this, NewEntryActivity.class);
-				i.putExtra(Global.QUICKCOPY_GROUP,
-						((Group) spinner.getSelectedItem()).name);
+                Group group = mFragments.get(mViewPager.getCurrentItem()).getGroup();
+				i.putExtra(Global.QUICKCOPY_GROUP, group.name);
 				startActivityForResult(i,		REQUEST_NEW_ENTRY);
 			} else {
 				// there is no group
@@ -222,58 +179,17 @@ public class EntryListActivity extends SherlockFragmentActivity {
 		} else if (requestCode == REQUEST_EDIT_ENTRY && resultCode == RESULT_OK) {
 			refreshList();
 		}
+
+
+        // TODO refresh all fragment lists
 	}
 
 	private void refreshList() {
-		ArrayList<Entry> entries = DBHelper.get(this).getEntriesFromGroup(
-				(Group) spinner.getSelectedItem());
-		entryAdapter.updateEntries(entries);
-		updateNoEntriesTextView();
+		for (EntryListFragment frag: mFragments) {
+            frag.refreshList();
+        }
 	}
 
-	private void fillGroupList() {
-		DBHelper db = DBHelper.get(this);
-		ArrayList<Group> groups = db.getGroups();
-		
-		spinner = (Spinner)findViewById(R.id.spinner_category);
-		ArrayAdapter<Group> adapter = new ArrayAdapter<Group>(this, android.R.layout.simple_spinner_item, groups);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner.setAdapter(adapter);
-		
-		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-			@Override
-			public void onItemSelected(AdapterView<?> adapterView, View view,
-					int position, long id) {
-				changeGroup((Group)adapterView.getAdapter().getItem((int)id));
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
-		String defaultGroup = Global.getPrefs(this).getString("integration.defaultgroup", "");
-		setSpinnerToGroup(defaultGroup);
-	}
-
-	private void changeGroup(Group group) {
-		ArrayList<Entry> entries = DBHelper.get(this)
-				.getEntriesFromGroup(group);
-		entryAdapter.updateEntries(entries);
-		updateNoEntriesTextView();
-	}
-
-	private void updateNoEntriesTextView() {
-		TextView tv = (TextView)findViewById(R.id.tv_noentries);
-		if (entryAdapter.isEmpty()) {
-			tv.setVisibility(View.VISIBLE);
-		} else {
-			tv.setVisibility(View.GONE);
-		}
-	}
 
 	private void showAddGroupDialog() {
 		final View v = View.inflate(this, R.layout.addgroupdialog, null);
@@ -285,25 +201,11 @@ public class EntryListActivity extends SherlockFragmentActivity {
 					public void onClick(DialogInterface dialog, int which) {
 						String name = text.getText().toString();
 						addGroup(name);
-						fillGroupList();
-						setSpinnerToGroup(name);
+						refreshGroups();
 					}
 				}).setNegativeButton("Cancel", null).show();
 	}
 
-	/*
-	 * This is ugly I know
-	 */
-	protected void setSpinnerToGroup(String name) {
-		Adapter a = spinner.getAdapter();
-		for (int i = 0; i < a.getCount(); i++) {
-			Group g = (Group) a.getItem(i);
-			if (g.name.equals(name)) {
-				spinner.setSelection(i);
-				break;
-			}
-		}
-	}
 
 	protected void addGroup(String string) {
 		DBHelper.get(this).addGroup(string);
