@@ -37,14 +37,6 @@
 		<service android:name="be.vbsteven.qccommon.NotificationService" />
 		
 		
-		<service android:name="be.vbsteven.qccommon.QuickcopyIME" android:label="@string/quickcopy_input_label"
-			android:permission="android.permission.BIND_INPUT_METHOD">
-			<intent-filter>
-				<action android:name="android.view.InputMethod" />
-			</intent-filter>
-			<meta-data android:name="android.view.im" android:resource="@xml/method" />
-		</service>
-
 		<meta-data android:value="a14b766b422458d" android:name="ADMOB_PUBLISHER_ID" />
 	</application>
 	<uses-sdk android:minSdkVersion="3" android:targetSdkVersion="16" />
