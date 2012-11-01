@@ -129,7 +129,7 @@ public class EntryListActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		init();
+		refreshList();
 		
 	}
 

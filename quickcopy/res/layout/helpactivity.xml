@@ -1,11 +1,5 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-	xmlns:app="http://schemas.android.com/apk/res/be.vbsteven.quickcopy"
-    
-	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
-	<include android:id="@+id/topbar" layout="@layout/topbar" />
-<ScrollView 
-	android:layout_below="@id/topbar"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fillViewport="true"
@@ -46,31 +40,9 @@
 		android:layout_height="wrap_content"
 		android:layout_width="wrap_content"
 		android:textAppearance="?android:attr/textAppearanceSmall"
-		android:text="1. Use the menu button to add new entries to the list\n2. Tap an existing entry to copy that entry onto the clipboard\n3. Long press on an existing entry to edit or delete that entry"
+		android:text="1. Use the actionbar to add new entries to the list\n2. Tap an existing entry to copy that entry onto the clipboard\n3. Long press on an existing entry to edit or delete that entry"
 		/>
-		
-	<TextView
-		android:layout_marginBottom="10dp"
-		android:layout_height="wrap_content"
-		android:layout_width="wrap_content"
-		android:textAppearance="?android:attr/textAppearanceMedium"
-		android:text="Using the Quickcopy keyboard (only FULL version)"
-		/> 
-		
-	<TextView
-		android:layout_marginBottom="10dp"
-		android:layout_height="wrap_content"
-		android:layout_width="wrap_content"
-		android:textAppearance="?android:attr/textAppearanceSmall"
-		android:text="To start using the Quickcopy keyboard you first need to enable it in your phone settings. Under the Language &#038; keyboard submenu."
-		/>
-	<TextView
-		android:layout_marginBottom="10dp"
-		android:layout_height="wrap_content"
-		android:layout_width="wrap_content"
-		android:textAppearance="?android:attr/textAppearanceSmall"
-		android:text="Whenever you want to bring up the Quickcopy keyboard longpress on a textfield inside any application. Choose Input Method and select Quickcopy keyboard in the list."
-		/>
+
 	
 	<TextView
 		android:layout_marginBottom="10dp"
@@ -86,10 +58,9 @@
 		android:layout_width="wrap_content"
 		android:textAppearance="?android:attr/textAppearanceSmall"
 		android:autoLink="all"
-		android:text="If you have any questions or comments about this application feel free to mail me on steven.v.bael@gmail.com or mention me on twitter.\nhttp://twitter.com/vbsteven\nhttp://twitter.com/quickcopyapp"
+		android:text="If you have any questions or comments about this application feel free to mail me on steven.v.bael@gmail.com or contact me on G+\nhttps://plus.google.com/106898588952511738977"
 		/>
 		
 
 </LinearLayout>
 </ScrollView>
-</RelativeLayout>

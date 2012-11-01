@@ -25,6 +25,7 @@ public class GroupManagementActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+        setTitle("Groups");
 		init();
 	}
 
