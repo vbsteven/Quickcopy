@@ -14,14 +14,18 @@
 			android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium"
 			android:text="Title" />
 		<EditText android:layout_width="fill_parent"
-			android:layout_height="wrap_content" android:id="@+id/et_title" />
+			android:layout_height="wrap_content" android:id="@+id/et_title"
+            android:inputType="text"
+                />
 
 		<TextView android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium"
 			android:text="Value" />
 		<EditText android:layout_width="fill_parent"
 			android:layout_height="wrap_content" android:id="@+id/et_value"
-			android:minLines="3" android:autoText="true" />
+			android:minLines="3" android:autoText="true"
+            android:inputType="text"
+                />
 
 		<LinearLayout android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:gravity="center_vertical">
@@ -32,7 +36,8 @@
 
 			<TextView android:layout_width="fill_parent"
 				android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium"
-				android:text="Password" android:layout_marginLeft="10dp" />
+				android:text="Password" android:layout_marginLeft="10dp"
+                    />
 
 		</LinearLayout>
 
