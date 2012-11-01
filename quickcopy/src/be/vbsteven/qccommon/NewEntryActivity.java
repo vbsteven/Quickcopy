@@ -32,7 +32,6 @@ public class NewEntryActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.newentryactivity);
@@ -66,7 +65,7 @@ public class NewEntryActivity extends Activity {
 				setSpinnerToGroup(g.name);
 			}
 		} else {
-			setTitle("Quickcopy - new entry");
+			setTitle("New entry");
 			Button but = (Button)findViewById(R.id.but_create);
 			but.setOnClickListener(new OnClickListener() {
 				

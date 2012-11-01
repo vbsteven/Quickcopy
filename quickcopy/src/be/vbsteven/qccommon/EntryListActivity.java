@@ -47,7 +47,7 @@ public class EntryListActivity extends SherlockFragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setTitle("Quickcopy - entry list");
+		setTitle("Quickcopy");
 		
 		if (Global.getPrefs(this).getBoolean("integration.shownotification", false)) {
 			startService(new Intent(this, NotificationService.class));

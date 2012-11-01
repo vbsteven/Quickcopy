@@ -18,10 +18,10 @@ public class NewGroupActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.newgroupactivity);
+        setTitle("New group");
 		
 		
 		Button saveButton = (Button)findViewById(R.id.but_save_group);
