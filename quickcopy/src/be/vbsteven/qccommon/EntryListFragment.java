@@ -85,8 +85,8 @@ public class EntryListFragment extends SherlockListFragment {
 
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
 
-        Entry entryForContextMenu = (Entry) getListAdapter().getItem(info.position);
-        menu.setHeaderTitle(entryForContextMenu.key);
+        mEntryForContextMenu = (Entry) getListAdapter().getItem(info.position);
+        menu.setHeaderTitle(mEntryForContextMenu.key);
         menu.add(0, CONTEXT_MENU_EDIT, 0, "Edit entry");
         menu.add(0, CONTEXT_MENU_SHARE, 0, "Share entry");
         menu.add(0, CONTEXT_MENU_DELETE, 0, "Delete entry");
